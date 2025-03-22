@@ -1,9 +1,10 @@
-import socket
+import paramiko
 import threading
-import json
-import logging
+import socket
 import os
 import sys
+import logging
+import json
 import time
 import re
 import random
@@ -22,6 +23,49 @@ logging.basicConfig(level=logging.INFO,
 
 logger = logging.getLogger(__name__)
 
+class SSHServer(paramiko.ServerInterface):
+    def __init__(self, honeypot):
+        self.honeypot = honeypot
+        self.event = threading.Event()
+        self.channel = None
+
+    def check_auth_password(self, username, password):
+        if username in self.honeypot.valid_credentials:
+            if self.honeypot.valid_credentials[username] == password:
+                return paramiko.AUTH_SUCCESSFUL
+        return paramiko.AUTH_FAILED
+
+    def get_allowed_auths(self, username):
+        return 'password'
+        
+    def check_channel_request(self, kind, chanid):
+        if kind == "session":
+            return paramiko.OPEN_SUCCEEDED
+        return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
+        
+    def check_channel_shell_request(self, channel):
+        self.event.set()
+        return True
+        
+    def check_channel_pty_request(self, channel, term, width, height, pixelwidth, pixelheight, modes):
+        return True
+        
+    def check_channel_exec_request(self, channel, command):
+        self.event.set()
+        return True
+
+    def get_banner(self):
+        return b"Welcome to IoT Device Management\n", b"en-US"
+        
+    def check_auth_none(self, username):
+        return paramiko.AUTH_FAILED
+        
+    def check_auth_publickey(self, username, key):
+        return paramiko.AUTH_FAILED
+        
+    def check_channel_env_request(self, channel, name, value):
+        return False
+
 class EnhancedIoTHoneypot:
     """Enhanced honeypot that mimics IoT devices and integrates with ML-IDS"""
     
@@ -33,6 +77,17 @@ class EnhancedIoTHoneypot:
         self.server_socket = None
         self.connections = []
         self.ml_model = ml_model
+
+        # Setup SSH logging
+        paramiko.util.log_to_file(os.path.join(config.LOGS_DIR, 'ssh.log'))
+        
+        # Generate or load SSH host key
+        key_path = os.path.join(config.BASE_DIR, 'ssh_host_rsa_key')
+        try:
+            self.host_key = paramiko.RSAKey(filename=key_path)
+        except:
+            self.host_key = paramiko.RSAKey.generate(2048)
+            self.host_key.write_private_key_file(key_path)
         
         # Authentication and security
         self.valid_credentials = {"admin": "secure_iot_2025", "user": "iot_user_pass"}
@@ -149,362 +204,113 @@ class EnhancedIoTHoneypot:
                 if self.running:
                     logger.error(f"Error accepting connection: {str(e)}")
                     time.sleep(1)
-    
+
     def _handle_client(self, client_socket, client_address):
         """Handle client connection and log activity"""
         ip, port = client_address
-        logger.info(f"Handling connection from {ip}:{port} to {self.current_device}")
-        
-        authenticated = not self.authentication_required
-        in_sandbox = False
-        username = None
-        connected_device = None
+        logger.info(f"SSH connection from {ip}:{port}")
         
         try:
-            # Set a timeout to prevent hanging
-            client_socket.settimeout(300)  # 5 minutes
+            # Set up SSH transport
+            transport = paramiko.Transport(client_socket)
+            transport.set_gss_host(socket.getfqdn(""))
+            transport.add_server_key(self.host_key)
+            transport.local_version = "SSH-2.0-OpenSSH_8.9p1"  # Mimic OpenSSH
             
-            # Send welcome banner
-            welcome = f"Welcome to IoT {self.current_device.capitalize()} Management Interface\n"
-            welcome += "========================================\n"
-            welcome += f"Firmware version: 1.2.3\n"
-            welcome += f"Device ID: IOT{random.randint(10000, 99999)}\n\n"
+            # Initialize server interface
+            server = SSHServer(self)
             
-            if self.authentication_required:
-                welcome += "Please login to continue.\n"
-            else:
-                welcome += "Type 'help' for available commands.\n"
-            
-            client_socket.send(welcome.encode())
-            
-            while self.running:
-                if self.authentication_required and not authenticated:
-                    # Authentication flow
-                    client_socket.send(b"Username: ")
-                    username_data = client_socket.recv(1024)
-                    if not username_data:
-                        break
-                    username = username_data.decode('utf-8', errors='ignore').strip()
-                    
-                    client_socket.send(b"Password: ")
-                    password_data = client_socket.recv(1024)
-                    if not password_data:
-                        break
-                    password = password_data.decode('utf-8', errors='ignore').strip()
-                    
-                    self._log_activity(client_address, "login_attempt", f"Login attempt: {username}")
-                    
-                    is_malicious_input = False
-                    for pattern, atype in self.attack_patterns:
-                        if re.search(pattern, username, re.IGNORECASE) or re.search(pattern, password, re.IGNORECASE):
-                            is_malicious_input = True
-                            attack_type = atype
-                            self._log_activity(client_address, "attack_in_credentials", f"Attack detected in credentials: {attack_type}")
-                            logger.warning(f"Attack attempt in credentials from {ip}:{port} - {attack_type}")
-                            break
-
-                    if is_malicious_input:
-                        # Immediately sandbox and fake successful login for malicious credential input
-                        in_sandbox = True
-                        self.sandboxed_sessions.add(client_socket)
-                        authenticated = True  # Fake authentication
-                        
-                        # Send fake success message
-                        client_socket.send(b"\nLogin successful. Welcome to IoT Network Control Center!\n")
-                        client_socket.send(b"You now have ADMIN access to all connected devices.\nType 'help' for available commands.\n\n")
-                        
-                        self._log_activity(client_address, "fake_access_granted", f"Attacker given fake admin access after malicious credential input: {attack_type}")
-                        logger.warning(f"Attacker from {ip}:{port} given fake admin access after malicious credential input")
-                    elif username in self.valid_credentials and self.valid_credentials[username] == password:
-                        authenticated = True
-                        client_socket.send(b"\nLogin successful. Type 'help' for available commands.\n\n")
-                        logger.info(f"User {username} authenticated from {ip}:{port}")
-                    else:
-                        self.failed_attempts[ip] += 1
-                        remaining = self.max_failed_attempts - self.failed_attempts[ip]
-                        
-                        if self.failed_attempts[ip] >= 3 and self.failed_attempts[ip] < 4:
-                            # Special case: On the 4th attempt, give fake success to trap the attacker
-                            authenticated = True  # Fake authentication
-                            in_sandbox = True
-                            self.sandboxed_sessions.add(client_socket)
-                            
-                            # Send fake success message
-                            client_socket.send(b"\nLogin successful. Welcome to IoT Network Control Center!\n")
-                            client_socket.send(b"You now have LIMITED access to the network.\nType 'help' for available commands.\n\n")
-                            
-                            self._log_activity(client_address, "fake_access_granted", "Attacker given fake access after multiple failed attempts")
-                            logger.warning(f"Attacker from {ip}:{port} given fake access after 3 failed login attempts")
-                        elif remaining <= 0:
-                            # Too many failed attempts (beyond 4), blacklist IP
-                            self.blacklisted_ips.add(ip)
-                            client_socket.send(b"\nToo many failed login attempts. Your IP has been blacklisted.\n")
-                            self._log_activity(client_address, "blacklisted", f"IP blacklisted after {self.max_failed_attempts} failed login attempts")
-                            break
-                        else:
-                            client_socket.send(f"\nInvalid credentials. {remaining} attempt(s) remaining.\n\n".encode())
-                            # Put in sandbox after first failed attempt
-                            if not in_sandbox:
-                                in_sandbox = True
-                                self.sandboxed_sessions.add(client_socket)
-                                self._log_activity(client_address, "sandboxed", "Session moved to sandbox after failed login")
-                                logger.warning(f"Session from {ip}:{port} moved to sandbox")
-                        
-                        # If we have an ML model, check if this behavior is malicious
-                        if self.ml_model and self.failed_attempts[ip] >= 2:
-                            # Create a feature vector for the model
-                            sample = {
-                                'src_ip': ip,
-                                'failed_logins': self.failed_attempts[ip],
-                                'flow_duration': random.randint(1000, 5000),
-                                'flow_pkts': self.failed_attempts[ip] * 2,
-                                'flow_bytes': self.failed_attempts[ip] * 100
-                            }
-                            
-                            prediction = self.ml_model.predict(sample)
-                            if prediction == 1:  # Malicious
-                                logger.warning(f"ML model detected malicious behavior from {ip}")
-                                self.blacklisted_ips.add(ip)
-                                client_socket.send(b"\nSuspicious activity detected. Your IP has been blacklisted.\n")
-                                self._log_activity(client_address, "ml_blacklisted", "IP blacklisted by ML model")
-                                break
-                    
-                    continue  # Continue to next iteration of the auth loop
-                
-                # Main command loop for authenticated users
-                if connected_device:
-                    prompt = f"[{connected_device['type']}@{connected_device['ip']}]$ "
-                else:
-                    prompt = f"[{self.current_device}]$ " if not in_sandbox else f"[sandbox-{self.current_device}]$ "
-                
-                client_socket.send(prompt.encode())
-                
-                # Receive data from client
-                data = client_socket.recv(4096)
-                if not data:
-                    break
-                    
-                # Process the command
-                cmd = data.decode('utf-8', errors='ignore').strip()
-                self._log_activity(client_address, "command", f"Command: {cmd}")
-                
-                # Check for malicious commands
-                is_attack = False
-                attack_type = None
-                for pattern, atype in self.attack_patterns:
-                    if re.search(pattern, cmd, re.IGNORECASE):
-                        is_attack = True
-                        attack_type = atype
-                        break
-                
-                if is_attack:
-                    self._log_activity(client_address, "attack_detected", f"Attack type: {attack_type}, Command: {cmd}")
-                    logger.warning(f"Attack detected from {ip}:{port} - {attack_type}")
-                    
-                    # Move to sandbox if not already
-                    if not in_sandbox:
-                        in_sandbox = True
-                        self.sandboxed_sessions.add(client_socket)
-                        self._log_activity(client_address, "sandboxed", f"Session moved to sandbox after attack: {attack_type}")
-                    
-                    # If we have an ML model, check if this behavior is malicious enough to blacklist
-                    if self.ml_model:
-                        sample = {
-                            'src_ip': ip,
-                            'attack_type': 1,  # Numeric encoding for attack
-                            'flow_duration': random.randint(1000, 5000),
-                            'flow_pkts': random.randint(10, 50),
-                            'flow_bytes': random.randint(500, 2000)
-                        }
-                        
-                        probability = self.ml_model.predict_proba(sample)
-                        if probability is not None and len(probability) > 0:
-                            conf_score = probability[0][1]
-                            logger.info(f"ML model prediction for {ip}: confidence score {conf_score:.4f}")
-                            self._log_activity(client_address, "ml_prediction", f"ML confidence: {conf_score:.4f}")
-                            
-                            # Then check threshold for blacklisting
-                            if conf_score > 0.25:
-                                logger.warning(f"ML model confirms attack from {ip} (confidence: {conf_score:.4f})")
-                                self.blacklisted_ips.add(ip)
-                                client_socket.send(b"\nSuspicious activity detected. Your IP has been blacklisted.\n")
-                                self._log_activity(client_address, "ml_blacklisted", f"IP blacklisted by ML model (confidence: {conf_score:.4f})")
-                                break
-                    
-                    # Return fake response for the attack
-                    response = self._get_fake_response_for_attack(attack_type)
-                    client_socket.send(response.encode())
-                    continue
-
-                # Enhanced sandbox experience (keeping attackers engaged)
-                if in_sandbox and self._enhance_sandbox_experience(client_socket, cmd, client_address):
-                    continue
-                
-                # Process legitimate commands
-                if cmd.lower() == 'help':
-                    if in_sandbox:
-                        # Enhanced sandbox help that looks like real access
-                        if self.failed_attempts[ip] >= 3 or is_malicious_input:
-                            # This is a trapped attacker who thinks they have access
-                            is_admin = "admin" in username.lower() if username else False
-                            help_text = self._get_enhanced_sandbox_help(is_admin)
-                        else:
-                            # Limited help in basic sandbox
-                            help_text = "Available commands:\n"
-                            help_text += "  help    - Show this help message\n"
-                            help_text += "  status  - Show device status\n"
-                            help_text += "  exit    - Exit the session\n"
-                        client_socket.send(help_text.encode())
-                
-                elif cmd.lower() == 'exit':
-                    client_socket.send(b"Goodbye!\n")
-                    break
-                
-                elif cmd.lower() == 'disconnect':
-                    if connected_device:
-                        device_type = connected_device['type']
-                        client_socket.send(f"\nDisconnecting from {device_type} at {connected_device['ip']}...\n".encode())
-                        time.sleep(0.5)
-                        client_socket.send(b"You are now back at the main IoT network hub.\n")
-                        client_socket.send(b"Type 'devices' to see available devices or 'connect' to connect to another device.\n\n")
-                        
-                        self._log_activity(client_address, "device_disconnect", f"User {username} disconnected from {device_type} at {connected_device['ip']}")
-                        connected_device = None
-                        self.connected_devices.pop(client_socket, None)
-                    else:
-                        client_socket.send(b"You are not currently connected to any device.\n")
-                
-                elif cmd.lower() == 'connect' and authenticated and not in_sandbox:
-                    # Connect to real IoT network
-                    client_socket.send(b"\nConnecting to IoT network...\n")
-                    time.sleep(0.5)
-                    client_socket.send(b"Available devices:\n")
-                    
-                    for i, device in enumerate(self.real_iot_devices):
-                        client_socket.send(f"  {i+1}. {device['type'].capitalize()} at {device['ip']}:{device['port']}\n".encode())
-                    
-                    client_socket.send(b"\nEnter device number to connect to: ")
-                    device_choice = client_socket.recv(1024)
-                    if not device_choice:
-                        break
-                    
-                    choice = device_choice.decode('utf-8', errors='ignore').strip()
-                    try:
-                        idx = int(choice) - 1
-                        if 0 <= idx < len(self.real_iot_devices):
-                            device = self.real_iot_devices[idx]
-                            client_socket.send(f"\nConnecting to {device['type']} at {device['ip']}:{device['port']}...\n".encode())
-                            time.sleep(0.5)
-                            
-                            # Store connected device info
-                            connected_device = device
-                            self.connected_devices[client_socket] = device
-                            
-                            # In a real implementation, we would relay the connection
-                            # For the demo, we'll just simulate it
-                            client_socket.send(b"\nConnection successful! You are now on the real IoT network.\n")
-                            client_socket.send(f"Welcome to {device['type'].capitalize()} control panel.\n".encode())
-                            client_socket.send(b"Type 'help' for available commands or 'disconnect' to return to the hub.\n\n")
-                            
-                            self._log_activity(client_address, "real_connect", f"User {username} connected to real device: {device['type']} at {device['ip']}")
-                        else:
-                            client_socket.send(b"Invalid device number.\n")
-                    except ValueError:
-                        client_socket.send(b"Invalid input. Please enter a number.\n")
-                
-                elif cmd.lower() == 'devices' and authenticated:
-                    # List fake devices in sandbox, real devices otherwise
-                    if in_sandbox:
-                        # Fake devices
-                        client_socket.send(b"Available devices in network:\n")
-                        for i in range(5):
-                            fake_ip = f"192.168.1.{random.randint(10, 99)}"
-                            fake_type = random.choice(self.device_types)
-                            client_socket.send(f"  {i+1}. {fake_type.capitalize()} at {fake_ip}:8080\n".encode())
-                    else:
-                        # Real devices
-                        client_socket.send(b"Available devices in network:\n")
-                        for i, device in enumerate(self.real_iot_devices):
-                            client_socket.send(f"  {i+1}. {device['type'].capitalize()} at {device['ip']}:{device['port']}\n".encode())
-                
-                elif cmd.lower() == 'status':
-                    # Show device status
-                    if connected_device:
-                        device_type = connected_device['type']
-                        status = f"Device: {device_type.capitalize()}\n"
-                        status += f"IP: {connected_device['ip']}\n"
-                        status += f"Status: Online\n"
-                        status += f"Uptime: {random.randint(1, 24)} hours\n"
-                        
-                        if device_type == "camera":
-                            status += f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}\n"
-                            status += f"Resolution: {random.choice(['720p', '1080p', '4K'])}\n"
-                        elif device_type == "thermostat":
-                            status += f"Temperature: {random.randint(65, 85)}°F\n"
-                            status += f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}\n"
-                        elif device_type == "smartlock":
-                            status += f"Lock status: {random.choice(['Locked', 'Unlocked'])}\n"
-                            status += f"Battery: {random.randint(50, 100)}%\n"
-                    else:
-                        status = f"Device: {self.current_device.capitalize()}\n"
-                        status += f"Status: Online\n"
-                        status += f"Uptime: {random.randint(1, 24)} hours\n"
-                        
-                        if self.current_device == "camera":
-                            status += f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}\n"
-                        elif self.current_device == "thermostat":
-                            status += f"Temperature: {random.randint(65, 85)}°F\n"
-                            status += f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}\n"
-                    
-                    client_socket.send(status.encode())
-                
-                else:
-                    # Handle device-specific commands based on connected device or current device
-                    current = connected_device['type'] if connected_device else self.current_device
-                    device_commands = self.device_commands.get(current, [])
-                    command_found = False
-                    
-                    for command in device_commands:
-                        if cmd.lower().startswith(command):
-                            command_found = True
-                            response = f"Executing {command} command...\n"
-                            
-                            if command == "view" and current == "camera":
-                                response += "Streaming video feed...\n"
-                            elif command == "temperature" and current == "thermostat":
-                                response += f"Current temperature: {random.randint(65, 85)}°F\n"
-                            elif command == "lock" and current == "smartlock":
-                                response += "Lock engaged successfully.\n"
-                            elif command == "unlock" and current == "smartlock":
-                                response += "Lock disengaged. Door is now unlocked.\n"
-                            else:
-                                response += f"{command.capitalize()} operation completed successfully.\n"
-                            
-                            client_socket.send(response.encode())
-                            break
-                    
-                    if not command_found:
-                        client_socket.send(f"Unknown command: {cmd}. Type 'help' for available commands.\n".encode())
-        
-        except socket.timeout:
-            self._log_activity(client_address, "timeout", "Connection timed out")
-        except Exception as e:
-            logger.error(f"Error handling client: {str(e)}")
-            self._log_activity(client_address, "error", f"Error handling client: {str(e)}")
-        finally:
-            # Close the connection
             try:
-                client_socket.close()
-                if client_socket in self.connections:
-                    self.connections.remove(client_socket)
-                if client_socket in self.sandboxed_sessions:
-                    self.sandboxed_sessions.remove(client_socket)
-                if client_socket in self.connected_devices:
-                    del self.connected_devices[client_socket]
-            except:
-                pass
+                transport.start_server(server=server)
+            except paramiko.SSHException as e:
+                logger.warning(f"SSH negotiation failed from {ip}:{port}: {str(e)}")
+                return
                 
-            logger.info(f"Connection closed for {ip}:{port}")
+            # Wait for auth
+            server.event.wait(10)
+            if not transport.is_active():
+                logger.warning(f"Client {ip}:{port} never asked for authentication")
+                return
+                
+            # Wait for channel
+            channel = transport.accept(20)
+            if channel is None:
+                logger.warning(f"No channel from {ip}:{port}")
+                return
+                
+            # Wait for shell request
+            server.event.wait(10)
+            if not server.event.is_set():
+                logger.warning(f"Client {ip}:{port} never asked for a shell")
+                return
+                
+            # Send welcome message
+            welcome = f"Welcome to IoT Device Management Console\r\n"
+            welcome += f"Type 'help' for available commands\r\n\n"
+            channel.send(welcome)
+            
+            # Interactive shell loop
+            while transport.is_active():
+                channel.send("$ ")
+                command = ""
+                
+                # Read command character by character
+                while True:
+                    char = channel.recv(1)
+                    if not char:  # EOF
+                        break
+                    char = char.decode('utf-8', errors='ignore')
+                    if char == '\r':  # Enter
+                        channel.send('\r\n')
+                        break
+                    elif char == '\x7f':  # Backspace
+                        if command:
+                            command = command[:-1]
+                            channel.send('\b \b')
+                    else:
+                        command += char
+                        channel.send(char.encode())
+                
+                if not command:  # Empty command
+                    continue
+                    
+                if command.lower() == 'exit':
+                    channel.send('Goodbye!\r\n')
+                    break
+                
+                # Process command and send response
+                response = self._process_command(command, client_address)
+                channel.send(response + '\r\n')
+        
+        except Exception as e:
+            logger.error(f"Error handling SSH client: {str(e)}")
+        finally:
+            if 'channel' in locals() and channel is not None:
+                channel.close()
+            if 'transport' in locals() and transport is not None:
+                transport.close()
+            if client_socket in self.connections:
+                self.connections.remove(client_socket)
+
+    def _process_command(self, command, client_address):
+        """Process command and return response"""
+        ip, port = client_address
+        self._log_activity(client_address, "command", f"Command: {command}")
+        
+        # Check for malicious commands
+        for pattern, attack_type in self.attack_patterns:
+            if re.search(pattern, command, re.IGNORECASE):
+                self._log_activity(client_address, "attack_detected", f"Attack type: {attack_type}")
+                logger.warning(f"Attack detected from {ip}:{port} - {attack_type}")
+                return self._get_fake_response_for_attack(attack_type)
+        
+        # Process legitimate commands
+        if command.lower() == 'help':
+            return self._get_enhanced_sandbox_help()
+        elif command.lower() == 'status':
+            return f"Device: {self.current_device}\nStatus: Online\nUptime: {random.randint(1, 24)} hours"
+        else:
+            return f"Unknown command: {command}. Type 'help' for available commands."
     
     def _get_fake_response_for_attack(self, attack_type):
         """Generate fake responses for attack attempts"""

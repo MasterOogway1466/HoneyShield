@@ -49,10 +49,10 @@ def main():
     
     # Print connection instructions
     print("\n=== CONNECTION INSTRUCTIONS FOR TEAMMATES ===")
-    print(f"1. Download the honeypot_client.py file")
-    print(f"2. Run: python honeypot_client.py {ip} 8080")
-    print(f"3. Use username 'admin' and password 'secure_iot_2025' for authorized access")
-    print(f"   Or try wrong passwords to trigger the sandbox")
+    print(f"1. Connect via SSH using:")
+    print(f"   ssh admin@{ip} -p 8888")
+    print(f"2. Password: secure_iot_2025")
+    print(f"3. Or try wrong passwords to trigger the sandbox")
     print("=" * 50 + "\n")
 
     print("Starting CICFlowMeter for real-time traffic analysis...")
@@ -60,12 +60,11 @@ def main():
     cicflow.start_capture()
     print("CICFlowMeter started")
 
-    
     # Start honeypot in separate thread
-    print("Starting IoT Security Honeypot...")
+    print("Starting IoT Security Honeypot (SSH Service)...")
     honeypot_thread = threading.Thread(
         target=run_command,
-        args=(["python", "run_honeypot.py", "--host", "0.0.0.0", "--port", "8080", "--reset-blacklist"], "Honeypot")
+        args=(["python", "run_honeypot.py", "--host", "0.0.0.0", "--port", "8888", "--reset-blacklist"], "Honeypot")
     )
     honeypot_thread.daemon = True
     honeypot_thread.start()
