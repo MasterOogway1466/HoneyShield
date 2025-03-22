@@ -64,6 +64,9 @@ class EnhancedIoTHoneypot:
         # Sandbox environment tracking
         self.sandboxed_sessions = set()
         
+        # Active connections tracking
+        self.connected_devices = {}  # Maps client_socket to connected device info
+        
         # Attack detection patterns
         self.attack_patterns = [
             (r"^\s*(cat|head|tail|more|less)\s+(/etc/passwd|/etc/shadow)", "file_read_attempt"),
@@ -155,6 +158,7 @@ class EnhancedIoTHoneypot:
         authenticated = not self.authentication_required
         in_sandbox = False
         username = None
+        connected_device = None
         
         try:
             # Set a timeout to prevent hanging
@@ -235,7 +239,11 @@ class EnhancedIoTHoneypot:
                     continue  # Continue to next iteration of the auth loop
                 
                 # Main command loop for authenticated users
-                prompt = f"[{self.current_device}]$ " if not in_sandbox else f"[sandbox-{self.current_device}]$ "
+                if connected_device:
+                    prompt = f"[{connected_device['type']}@{connected_device['ip']}]$ "
+                else:
+                    prompt = f"[{self.current_device}]$ " if not in_sandbox else f"[sandbox-{self.current_device}]$ "
+                
                 client_socket.send(prompt.encode())
                 
                 # Receive data from client
@@ -295,8 +303,10 @@ class EnhancedIoTHoneypot:
                     client_socket.send(response.encode())
                     continue
 
+                # Enhanced sandbox experience (keeping attackers engaged)
                 if in_sandbox and self._enhance_sandbox_experience(client_socket, cmd, client_address):
                     continue
+                
                 # Process legitimate commands
                 if cmd.lower() == 'help':
                     if in_sandbox:
@@ -306,26 +316,53 @@ class EnhancedIoTHoneypot:
                         help_text += "  status  - Show device status\n"
                         help_text += "  exit    - Exit the session\n"
                         client_socket.send(help_text.encode())
+                    elif connected_device:
+                        # Help for connected device
+                        device_type = connected_device['type']
+                        commands = self.device_commands.get(device_type, [])
+                        help_text = f"Connected to {device_type.capitalize()} at {connected_device['ip']}:{connected_device['port']}\n"
+                        help_text += "Available commands:\n"
+                        help_text += "  help       - Show this help message\n"
+                        for command in commands:
+                            help_text += f"  {command.ljust(10)} - {command.capitalize()} operation\n"
+                        help_text += "  disconnect - Disconnect and return to main hub\n"
+                        help_text += "  exit       - Exit the session\n"
+                        client_socket.send(help_text.encode())
                     else:
                         # Full help for authenticated users
                         commands = self.device_commands.get(self.current_device, [])
                         help_text = "Available commands:\n"
-                        help_text += "  help    - Show this help message\n"
+                        help_text += "  help       - Show this help message\n"
                         for command in commands:
-                            help_text += f"  {command.ljust(8)} - {command.capitalize()} operation\n"
-                        help_text += "  connect - Connect to real IoT network\n"
-                        help_text += "  devices - List available IoT devices\n"
-                        help_text += "  exit    - Exit the session\n"
+                            help_text += f"  {command.ljust(10)} - {command.capitalize()} operation\n"
+                        help_text += "  connect    - Connect to real IoT network\n"
+                        help_text += "  disconnect - Disconnect from current device\n"
+                        help_text += "  devices    - List available IoT devices\n"
+                        help_text += "  exit       - Exit the session\n"
                         client_socket.send(help_text.encode())
                 
                 elif cmd.lower() == 'exit':
                     client_socket.send(b"Goodbye!\n")
                     break
                 
+                elif cmd.lower() == 'disconnect':
+                    if connected_device:
+                        device_type = connected_device['type']
+                        client_socket.send(f"\nDisconnecting from {device_type} at {connected_device['ip']}...\n".encode())
+                        time.sleep(0.5)
+                        client_socket.send(b"You are now back at the main IoT network hub.\n")
+                        client_socket.send(b"Type 'devices' to see available devices or 'connect' to connect to another device.\n\n")
+                        
+                        self._log_activity(client_address, "device_disconnect", f"User {username} disconnected from {device_type} at {connected_device['ip']}")
+                        connected_device = None
+                        self.connected_devices.pop(client_socket, None)
+                    else:
+                        client_socket.send(b"You are not currently connected to any device.\n")
+                
                 elif cmd.lower() == 'connect' and authenticated and not in_sandbox:
                     # Connect to real IoT network
                     client_socket.send(b"\nConnecting to IoT network...\n")
-                    time.sleep(1)
+                    time.sleep(0.5)
                     client_socket.send(b"Available devices:\n")
                     
                     for i, device in enumerate(self.real_iot_devices):
@@ -342,12 +379,18 @@ class EnhancedIoTHoneypot:
                         if 0 <= idx < len(self.real_iot_devices):
                             device = self.real_iot_devices[idx]
                             client_socket.send(f"\nConnecting to {device['type']} at {device['ip']}:{device['port']}...\n".encode())
-                            time.sleep(1)
+                            time.sleep(0.5)
+                            
+                            # Store connected device info
+                            connected_device = device
+                            self.connected_devices[client_socket] = device
                             
                             # In a real implementation, we would relay the connection
                             # For the demo, we'll just simulate it
                             client_socket.send(b"\nConnection successful! You are now on the real IoT network.\n")
                             client_socket.send(f"Welcome to {device['type'].capitalize()} control panel.\n".encode())
+                            client_socket.send(b"Type 'help' for available commands or 'disconnect' to return to the hub.\n\n")
+                            
                             self._log_activity(client_address, "real_connect", f"User {username} connected to real device: {device['type']} at {device['ip']}")
                         else:
                             client_socket.send(b"Invalid device number.\n")
@@ -371,21 +414,39 @@ class EnhancedIoTHoneypot:
                 
                 elif cmd.lower() == 'status':
                     # Show device status
-                    status = f"Device: {self.current_device.capitalize()}\n"
-                    status += f"Status: Online\n"
-                    status += f"Uptime: {random.randint(1, 24)} hours\n"
-                    
-                    if self.current_device == "camera":
-                        status += f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}\n"
-                    elif self.current_device == "thermostat":
-                        status += f"Temperature: {random.randint(65, 85)}°F\n"
-                        status += f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}\n"
+                    if connected_device:
+                        device_type = connected_device['type']
+                        status = f"Device: {device_type.capitalize()}\n"
+                        status += f"IP: {connected_device['ip']}\n"
+                        status += f"Status: Online\n"
+                        status += f"Uptime: {random.randint(1, 24)} hours\n"
+                        
+                        if device_type == "camera":
+                            status += f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}\n"
+                            status += f"Resolution: {random.choice(['720p', '1080p', '4K'])}\n"
+                        elif device_type == "thermostat":
+                            status += f"Temperature: {random.randint(65, 85)}°F\n"
+                            status += f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}\n"
+                        elif device_type == "smartlock":
+                            status += f"Lock status: {random.choice(['Locked', 'Unlocked'])}\n"
+                            status += f"Battery: {random.randint(50, 100)}%\n"
+                    else:
+                        status = f"Device: {self.current_device.capitalize()}\n"
+                        status += f"Status: Online\n"
+                        status += f"Uptime: {random.randint(1, 24)} hours\n"
+                        
+                        if self.current_device == "camera":
+                            status += f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}\n"
+                        elif self.current_device == "thermostat":
+                            status += f"Temperature: {random.randint(65, 85)}°F\n"
+                            status += f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}\n"
                     
                     client_socket.send(status.encode())
                 
                 else:
-                    # Handle other device-specific commands
-                    device_commands = self.device_commands.get(self.current_device, [])
+                    # Handle device-specific commands based on connected device or current device
+                    current = connected_device['type'] if connected_device else self.current_device
+                    device_commands = self.device_commands.get(current, [])
                     command_found = False
                     
                     for command in device_commands:
@@ -393,13 +454,13 @@ class EnhancedIoTHoneypot:
                             command_found = True
                             response = f"Executing {command} command...\n"
                             
-                            if command == "view" and self.current_device == "camera":
+                            if command == "view" and current == "camera":
                                 response += "Streaming video feed...\n"
-                            elif command == "temperature" and self.current_device == "thermostat":
+                            elif command == "temperature" and current == "thermostat":
                                 response += f"Current temperature: {random.randint(65, 85)}°F\n"
-                            elif command == "lock" and self.current_device == "smartlock":
+                            elif command == "lock" and current == "smartlock":
                                 response += "Lock engaged successfully.\n"
-                            elif command == "unlock" and self.current_device == "smartlock":
+                            elif command == "unlock" and current == "smartlock":
                                 response += "Lock disengaged. Door is now unlocked.\n"
                             else:
                                 response += f"{command.capitalize()} operation completed successfully.\n"
@@ -423,6 +484,8 @@ class EnhancedIoTHoneypot:
                     self.connections.remove(client_socket)
                 if client_socket in self.sandboxed_sessions:
                     self.sandboxed_sessions.remove(client_socket)
+                if client_socket in self.connected_devices:
+                    del self.connected_devices[client_socket]
             except:
                 pass
                 
@@ -486,7 +549,7 @@ class EnhancedIoTHoneypot:
         if ip in self.blacklisted_ips:
             self.blacklisted_ips.remove(ip)
             logger.info(f"Removed {ip} from blacklist")
-
+    
     def _enhance_sandbox_experience(self, client_socket, cmd, client_address):
         """Provide interesting fake responses in sandbox to keep attackers engaged"""
         ip, port = client_address

@@ -285,3 +285,164 @@
 {"timestamp": "2025-03-22T20:24:28.333365", "ip": "127.0.0.1", "port": 65502, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
 {"timestamp": "2025-03-22T20:24:28.851145", "ip": "127.0.0.1", "port": 65503, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
 {"timestamp": "2025-03-22T20:24:29.369692", "ip": "127.0.0.1", "port": 65504, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:22:11.135446", "ip": "192.168.1.100", "port": 12345, "type": "ml_blacklisted", "details": "ML model detected brute force attack pattern (confidence: 0.87)", "device": "camera", "label": "threat"}
+{"timestamp": "2025-03-22T21:22:11.637354", "ip": "192.168.1.110", "port": 12345, "type": "ml_prediction", "details": "ML model detected command_injection (confidence: 0.65)", "device": "camera", "label": "threat"}
+{"timestamp": "2025-03-22T21:22:12.139167", "ip": "192.168.1.111", "port": 12346, "type": "ml_blacklisted", "details": "ML model detected port_scanning (confidence: 0.75)", "device": "camera", "label": "threat"}
+{"timestamp": "2025-03-22T21:22:12.640623", "ip": "192.168.1.112", "port": 12347, "type": "ml_blacklisted", "details": "ML model detected ddos_attempt (confidence: 0.85)", "device": "camera", "label": "threat"}
+{"timestamp": "2025-03-22T21:42:43.510216", "ip": "192.168.5.154", "port": 45387, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:10.782953", "ip": "192.168.5.201", "port": 53606, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:21.464689", "ip": "192.168.5.154", "port": 45387, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:24.971563", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:31.666071", "ip": "192.168.5.201", "port": 53606, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:34.590620", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: mode", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:35.353877", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:39.596777", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:41.118214", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: schedule", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:44.492202", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: status", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:46.185127", "ip": "192.168.5.201", "port": 53606, "type": "real_connect", "details": "User admin connected to real device: camera at 192.168.1.101", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:50.580517", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: devices", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:52.204643", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:43:53.609570", "ip": "192.168.5.154", "port": 45387, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:44:47.932421", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:44:51.653663", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:44:56.908213", "ip": "192.168.5.201", "port": 53606, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:12.344776", "ip": "192.168.5.201", "port": 53606, "type": "error", "details": "Error handling client: [WinError 10038] An operation was attempted on something that is not a socket", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:25.772616", "ip": "192.168.5.154", "port": 45753, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:28.259951", "ip": "192.168.5.201", "port": 49970, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:31.600872", "ip": "192.168.5.154", "port": 45753, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:31.601873", "ip": "192.168.5.154", "port": 45753, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "thermostat", "label": "threat"}
+{"timestamp": "2025-03-22T21:45:42.961373", "ip": "192.168.5.201", "port": 49970, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:42.963386", "ip": "192.168.5.201", "port": 49970, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "thermostat", "label": "threat"}
+{"timestamp": "2025-03-22T21:45:44.508571", "ip": "192.168.5.201", "port": 49970, "type": "login_attempt", "details": "Login attempt: qw", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:45.545998", "ip": "192.168.5.201", "port": 49970, "type": "login_attempt", "details": "Login attempt: ewef", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:45:45.547981", "ip": "192.168.5.201", "port": 49970, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "thermostat", "label": "threat"}
+{"timestamp": "2025-03-22T21:45:47.191435", "ip": "192.168.5.154", "port": 45753, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:46:01.560326", "ip": "192.168.5.154", "port": 45753, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:46:01.562335", "ip": "192.168.5.154", "port": 45753, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "thermostat", "label": "threat"}
+{"timestamp": "2025-03-22T21:46:14.672620", "ip": "192.168.5.154", "port": 45355, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:46:23.411256", "ip": "192.168.5.154", "port": 48671, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:47:34.266253", "ip": "192.168.5.201", "port": 37866, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:47:41.224040", "ip": "192.168.5.201", "port": 37870, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:47:44.536611", "ip": "192.168.5.201", "port": 60288, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T21:48:25.180633", "ip": "192.168.5.201", "port": 40430, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:35.279842", "ip": "192.168.5.201", "port": 40430, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:39.145851", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:47.784956", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:48.796572", "ip": "192.168.5.154", "port": 47541, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:51.893871", "ip": "192.168.5.201", "port": 40430, "type": "real_connect", "details": "User admin connected to real device: camera at 192.168.1.101", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:48:57.499282", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:00.233333", "ip": "192.168.5.201", "port": 40430, "type": "real_connect", "details": "User admin connected to real device: thermostat at 192.168.1.102", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:00.915249", "ip": "192.168.5.154", "port": 47541, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:00.916220", "ip": "192.168.5.154", "port": 47541, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T21:49:06.032138", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: disconnect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:06.534343", "ip": "192.168.5.201", "port": 40430, "type": "device_disconnect", "details": "User admin disconnected from thermostat at 192.168.1.102", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:18.711265", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:21.804539", "ip": "192.168.5.154", "port": 47541, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:26.151134", "ip": "192.168.5.154", "port": 47541, "type": "login_attempt", "details": "Login attempt: \u001b[A", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:26.153123", "ip": "192.168.5.154", "port": 47541, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T21:49:28.177276", "ip": "192.168.5.154", "port": 48293, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:30.082579", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: helo", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:31.088306", "ip": "192.168.5.154", "port": 48303, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:32.024956", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:33.711437", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:43.061879", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:47.905483", "ip": "192.168.5.201", "port": 40430, "type": "real_connect", "details": "User admin connected to real device: thermostat at 192.168.1.102", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:53.970613", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: helo", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:49:56.710290", "ip": "192.168.5.201", "port": 40430, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:51:39.628849", "ip": "192.168.5.154", "port": 47003, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:53:46.070140", "ip": "192.168.5.201", "port": 40430, "type": "error", "details": "Error handling client: [WinError 10054] An existing connection was forcibly closed by the remote host", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:53:47.763524", "ip": "192.168.5.201", "port": 48490, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:03.455157", "ip": "192.168.5.201", "port": 48490, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:07.093627", "ip": "192.168.5.201", "port": 48490, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:11.609809", "ip": "192.168.5.201", "port": 48490, "type": "real_connect", "details": "User admin connected to real device: camera at 192.168.1.101", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:36.245438", "ip": "192.168.5.201", "port": 48490, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:39.948682", "ip": "192.168.5.201", "port": 48490, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:45.755659", "ip": "192.168.5.201", "port": 48490, "type": "command", "details": "Command: exit", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:54:48.704868", "ip": "192.168.5.201", "port": 41330, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:55:07.900190", "ip": "192.168.5.201", "port": 41330, "type": "login_attempt", "details": "Login attempt: cat /etc/passwd", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:55:07.901335", "ip": "192.168.5.201", "port": 41330, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T21:55:24.596244", "ip": "192.168.5.201", "port": 41330, "type": "login_attempt", "details": "Login attempt: cat /etc/passwd", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:55:34.529786", "ip": "192.168.5.201", "port": 41330, "type": "login_attempt", "details": "Login attempt: g", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T21:55:34.531525", "ip": "192.168.5.201", "port": 41330, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T22:23:44.272522", "ip": "192.168.5.154", "port": 47979, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:23:50.834443", "ip": "192.168.5.154", "port": 47979, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:23:50.835453", "ip": "192.168.5.154", "port": 47979, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T22:24:17.595564", "ip": "192.168.5.201", "port": 59652, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:25.028487", "ip": "192.168.5.201", "port": 59652, "type": "login_attempt", "details": "Login attempt: user", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:25.030486", "ip": "192.168.5.201", "port": 59652, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T22:24:29.527516", "ip": "192.168.5.154", "port": 47979, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:32.950081", "ip": "192.168.5.201", "port": 59652, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:43.282298", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:44.465164", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:46.433991", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:58.264362", "ip": "192.168.5.154", "port": 47979, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:24:58.264362", "ip": "192.168.5.154", "port": 47979, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-22T22:25:04.839521", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: status", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:25:10.390824", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:25:15.053697", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:25:17.286764", "ip": "192.168.5.201", "port": 59652, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:28:34.414778", "ip": "192.168.5.201", "port": 59652, "type": "error", "details": "Error handling client: [WinError 10038] An operation was attempted on something that is not a socket", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T22:33:15.874808", "ip": "192.168.5.201", "port": 58350, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:19.753547", "ip": "192.168.5.154", "port": 47619, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:23.211036", "ip": "192.168.5.201", "port": 58350, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:29.166283", "ip": "192.168.5.201", "port": 58350, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:35.164115", "ip": "192.168.5.154", "port": 47619, "type": "login_attempt", "details": "Login attempt: admin\\", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:35.165131", "ip": "192.168.5.154", "port": 47619, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "hub", "label": "threat"}
+{"timestamp": "2025-03-22T22:33:41.014872", "ip": "192.168.5.154", "port": 47619, "type": "login_attempt", "details": "Login attempt: asdf", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:33:51.417251", "ip": "192.168.5.201", "port": 58350, "type": "command", "details": "Command: devices", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:17.840403", "ip": "192.168.5.201", "port": 45056, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:28.228491", "ip": "192.168.5.201", "port": 45056, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:35.350426", "ip": "192.168.5.201", "port": 45056, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:38.433821", "ip": "192.168.5.201", "port": 45056, "type": "real_connect", "details": "User admin connected to real device: camera at 192.168.1.101", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:51.896615", "ip": "192.168.5.154", "port": 47619, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:54.997514", "ip": "192.168.5.154", "port": 47619, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:34:58.127678", "ip": "192.168.5.154", "port": 47619, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:35:07.196916", "ip": "192.168.5.154", "port": 47121, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:35:17.239832", "ip": "192.168.5.154", "port": 47121, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:35:20.476882", "ip": "192.168.5.154", "port": 47121, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:35:26.546348", "ip": "192.168.5.154", "port": 47121, "type": "real_connect", "details": "User admin connected to real device: smartlock at 192.168.1.103", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:36:00.702910", "ip": "192.168.5.154", "port": 45319, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:36:03.993595", "ip": "192.168.5.154", "port": 45319, "type": "login_attempt", "details": "Login attempt: 123", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:36:03.994604", "ip": "192.168.5.154", "port": 45319, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "hub", "label": "threat"}
+{"timestamp": "2025-03-22T22:36:16.215408", "ip": "192.168.5.154", "port": 46753, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:39:38.435615", "ip": "192.168.5.201", "port": 45056, "type": "timeout", "details": "Connection timed out", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:43:28.526188", "ip": "192.168.5.201", "port": 41480, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:43:37.717955", "ip": "192.168.5.201", "port": 41480, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:43:41.014247", "ip": "192.168.5.201", "port": 41480, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:43:44.358767", "ip": "192.168.5.201", "port": 41480, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:44:01.071902", "ip": "192.168.5.201", "port": 41480, "type": "command", "details": "Command: 1", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:44:05.618620", "ip": "192.168.5.201", "port": 41480, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:47:21.590061", "ip": "192.168.5.201", "port": 41480, "type": "error", "details": "Error handling client: [WinError 10054] An existing connection was forcibly closed by the remote host", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:59:21.572471", "ip": "127.0.0.1", "port": 61996, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T22:59:41.603218", "ip": "127.0.0.1", "port": 61996, "type": "error", "details": "Error handling client: [WinError 10054] An existing connection was forcibly closed by the remote host", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:01:23.158186", "ip": "192.168.5.131", "port": 62282, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:01:46.563207", "ip": "192.168.5.131", "port": 62282, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:01:51.534971", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:02:13.595463", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: devices", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:02:17.418292", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: 1", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:02:21.627600", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: 1", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:00.533545", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:25.362312", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: 3", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:32.566819", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: bruh shut up", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:37.634537", "ip": "192.168.5.131", "port": 62282, "type": "command", "details": "Command: exit", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:42.370243", "ip": "192.168.5.131", "port": 63327, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:54.501092", "ip": "192.168.5.131", "port": 63327, "type": "login_attempt", "details": "Login attempt: admin", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:03:56.862797", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:02.126676", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:06.772298", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:12.777538", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: 1", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:16.252106", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: 1.", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:18.215944", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:21.221677", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:29.098921", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: connect", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:04:37.223802", "ip": "192.168.5.131", "port": 63327, "type": "command", "details": "Command: 3", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:09:37.235933", "ip": "192.168.5.131", "port": 63327, "type": "timeout", "details": "Connection timed out", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-22T23:19:03.224430", "ip": "192.168.5.201", "port": 42492, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:18.251426", "ip": "192.168.5.201", "port": 42492, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:23.269684", "ip": "192.168.5.201", "port": 42492, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:32.493302", "ip": "192.168.5.201", "port": 42492, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:36.262948", "ip": "192.168.5.201", "port": 42492, "type": "real_connect", "details": "User admin connected to real device: thermostat at 192.168.1.102", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:51.959299", "ip": "192.168.5.201", "port": 52866, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:19:59.520622", "ip": "192.168.5.201", "port": 52866, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:20:07.816327", "ip": "192.168.5.201", "port": 52866, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:25:07.820115", "ip": "192.168.5.201", "port": 52866, "type": "timeout", "details": "Connection timed out", "device": "smart_bulb", "label": "info"}

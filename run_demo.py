@@ -4,6 +4,7 @@ import argparse
 import subprocess
 import time
 import threading
+from src.ml_integration.cicflowmeter_integration import CICFlowMeterIntegration
 
 def run_command(cmd, name):
     """Run a command and prefix its output with the name"""
@@ -25,6 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description="IoT Security Honeypot Demo")
     parser.add_argument("--ip", type=str, help="Your IP address for teammates to connect to")
     args = parser.parse_args()
+
     
     # Get local IP to share with teammates
     if not args.ip:
@@ -52,6 +54,12 @@ def main():
     print(f"3. Use username 'admin' and password 'secure_iot_2025' for authorized access")
     print(f"   Or try wrong passwords to trigger the sandbox")
     print("=" * 50 + "\n")
+
+    print("Starting CICFlowMeter for real-time traffic analysis...")
+    cicflow = CICFlowMeterIntegration(interface="eth0")
+    cicflow.start_capture()
+    print("CICFlowMeter started")
+
     
     # Start honeypot in separate thread
     print("Starting IoT Security Honeypot...")
@@ -71,6 +79,16 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nShutting down demo...")
+
+    try:
+        print("\nPress Ctrl+C to stop the demo")
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nShutting down demo...")
+        if cicflow:
+            cicflow.stop_capture()
+            print("CICFlowMeter stopped")
 
 if __name__ == "__main__":
     main()
