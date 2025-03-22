@@ -446,3 +446,75 @@
 {"timestamp": "2025-03-22T23:19:59.520622", "ip": "192.168.5.201", "port": 52866, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T23:20:07.816327", "ip": "192.168.5.201", "port": 52866, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T23:25:07.820115", "ip": "192.168.5.201", "port": 52866, "type": "timeout", "details": "Connection timed out", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:28.236673", "ip": "192.168.5.201", "port": 59070, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:41.132600", "ip": "192.168.5.201", "port": 59070, "type": "login_attempt", "details": "Login attempt: admin", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:44.859786", "ip": "192.168.5.201", "port": 59070, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:47.114161", "ip": "192.168.5.201", "port": 59070, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:50.769347", "ip": "192.168.5.201", "port": 59070, "type": "command", "details": "Command: 2", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:57.191486", "ip": "192.168.5.201", "port": 59070, "type": "command", "details": "Command: connect", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:01:00.776588", "ip": "192.168.5.201", "port": 59070, "type": "real_connect", "details": "User admin connected to real device: thermostat at 192.168.1.102", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:28:53.628209", "ip": "10.20.202.141", "port": 53077, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:29:28.928935", "ip": "10.20.202.141", "port": 53077, "type": "login_attempt", "details": "Login attempt: cat /etc/passwd", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:29:28.929937", "ip": "10.20.202.141", "port": 53077, "type": "attack_in_credentials", "details": "Attack detected in credentials: file_read_attempt", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:29:28.930937", "ip": "10.20.202.141", "port": 53077, "type": "fake_access_granted", "details": "Attacker given fake admin access after malicious credential input: file_read_attempt", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:30:31.576968", "ip": "10.20.202.141", "port": 53077, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:30:34.490404", "ip": "10.20.202.141", "port": 53077, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:30:46.387793", "ip": "10.20.202.141", "port": 53077, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:30:48.719608", "ip": "10.20.202.141", "port": 53077, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:35:48.726610", "ip": "10.20.202.141", "port": 53077, "type": "timeout", "details": "Connection timed out", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:44:51.900584", "ip": "10.20.202.141", "port": 53191, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:04.979205", "ip": "10.20.202.141", "port": 53191, "type": "login_attempt", "details": "Login attempt: admin", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:10.536849", "ip": "10.20.202.141", "port": 53191, "type": "error", "details": "Error handling client: [WinError 10054] An existing connection was forcibly closed by the remote host", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:11.918185", "ip": "10.20.202.141", "port": 53192, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:17.146103", "ip": "10.20.202.141", "port": 53192, "type": "login_attempt", "details": "Login attempt: hi", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:17.147198", "ip": "10.20.202.141", "port": 53192, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "smartlock", "label": "threat"}
+{"timestamp": "2025-03-23T00:45:20.034007", "ip": "10.20.202.141", "port": 53192, "type": "login_attempt", "details": "Login attempt: 1", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:22.167960", "ip": "10.20.202.141", "port": 53192, "type": "login_attempt", "details": "Login attempt: 3", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:22.168963", "ip": "10.20.202.141", "port": 53192, "type": "fake_access_granted", "details": "Attacker given fake access after multiple failed attempts", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:22.819043", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: 4", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:33.847122", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:36.117544", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:42.210230", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: devices", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:45:44.609331", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: devices", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:06.181498", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: 3", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:07.731801", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: 3", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:31.740003", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:35.495071", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:38.326181", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:50.266913", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:46:55.062973", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:03.560105", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:03.561104", "ip": "10.20.202.141", "port": 53192, "type": "sandbox_scan", "details": "Attacker scanning network in sandbox: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:05.109959", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:05.110960", "ip": "10.20.202.141", "port": 53192, "type": "sandbox_scan", "details": "Attacker scanning network in sandbox: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:16.771751", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:18.484795", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:35.423539", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: status", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:47:37.072874", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: status", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:48:10.855655", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:48:12.158246", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:48:16.810091", "ip": "10.20.202.141", "port": 53192, "type": "command", "details": "Command: exit", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:48:50.160585", "ip": "10.20.202.141", "port": 53199, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:49:14.605590", "ip": "10.20.202.141", "port": 53199, "type": "login_attempt", "details": "Login attempt: a", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:49:14.607585", "ip": "10.20.202.141", "port": 53199, "type": "blacklisted", "details": "IP blacklisted after 4 failed login attempts", "device": "smartlock", "label": "threat"}
+{"timestamp": "2025-03-23T00:49:26.505788", "ip": "10.20.202.141", "port": 53200, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T00:50:28.208060", "ip": "10.20.202.141", "port": 53202, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:50:37.745616", "ip": "10.20.202.141", "port": 53202, "type": "login_attempt", "details": "Login attempt: a", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:50:37.747618", "ip": "10.20.202.141", "port": 53202, "type": "sandboxed", "details": "Session moved to sandbox after failed login", "device": "thermostat", "label": "threat"}
+{"timestamp": "2025-03-23T00:50:42.240499", "ip": "10.20.202.141", "port": 53202, "type": "login_attempt", "details": "Login attempt: b", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:50:45.628570", "ip": "10.20.202.141", "port": 53202, "type": "login_attempt", "details": "Login attempt: a", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:50:45.629571", "ip": "10.20.202.141", "port": 53202, "type": "fake_access_granted", "details": "Attacker given fake access after multiple failed attempts", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:02.153407", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:26.925581", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:30.683674", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:34.461226", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: connect", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:36.367979", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:37.723066", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:39.255334", "ip": "10.20.202.141", "port": 53202, "type": "command", "details": "Command: exit", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:44.717083", "ip": "10.20.202.141", "port": 53204, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:51:57.690126", "ip": "10.20.202.141", "port": 53204, "type": "login_attempt", "details": "Login attempt: admin", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:52:00.374112", "ip": "10.20.202.141", "port": 53204, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:52:03.867209", "ip": "10.20.202.141", "port": 53204, "type": "command", "details": "Command: exit", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:52:09.821034", "ip": "10.20.202.141", "port": 53205, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:52:15.954528", "ip": "10.20.202.141", "port": 53205, "type": "login_attempt", "details": "Login attempt: a", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T00:52:15.955532", "ip": "10.20.202.141", "port": 53205, "type": "blacklisted", "details": "IP blacklisted after 4 failed login attempts", "device": "thermostat", "label": "threat"}

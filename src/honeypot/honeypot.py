@@ -38,7 +38,7 @@ class EnhancedIoTHoneypot:
         self.valid_credentials = {"admin": "secure_iot_2025", "user": "iot_user_pass"}
         self.blacklisted_ips = set()
         self.failed_attempts = defaultdict(int)
-        self.max_failed_attempts = 3
+        self.max_failed_attempts = 4
         self.authentication_required = True
         
         # Real IoT network details
@@ -194,7 +194,28 @@ class EnhancedIoTHoneypot:
                     
                     self._log_activity(client_address, "login_attempt", f"Login attempt: {username}")
                     
-                    if username in self.valid_credentials and self.valid_credentials[username] == password:
+                    is_malicious_input = False
+                    for pattern, atype in self.attack_patterns:
+                        if re.search(pattern, username, re.IGNORECASE) or re.search(pattern, password, re.IGNORECASE):
+                            is_malicious_input = True
+                            attack_type = atype
+                            self._log_activity(client_address, "attack_in_credentials", f"Attack detected in credentials: {attack_type}")
+                            logger.warning(f"Attack attempt in credentials from {ip}:{port} - {attack_type}")
+                            break
+
+                    if is_malicious_input:
+                        # Immediately sandbox and fake successful login for malicious credential input
+                        in_sandbox = True
+                        self.sandboxed_sessions.add(client_socket)
+                        authenticated = True  # Fake authentication
+                        
+                        # Send fake success message
+                        client_socket.send(b"\nLogin successful. Welcome to IoT Network Control Center!\n")
+                        client_socket.send(b"You now have ADMIN access to all connected devices.\nType 'help' for available commands.\n\n")
+                        
+                        self._log_activity(client_address, "fake_access_granted", f"Attacker given fake admin access after malicious credential input: {attack_type}")
+                        logger.warning(f"Attacker from {ip}:{port} given fake admin access after malicious credential input")
+                    elif username in self.valid_credentials and self.valid_credentials[username] == password:
                         authenticated = True
                         client_socket.send(b"\nLogin successful. Type 'help' for available commands.\n\n")
                         logger.info(f"User {username} authenticated from {ip}:{port}")
@@ -202,8 +223,20 @@ class EnhancedIoTHoneypot:
                         self.failed_attempts[ip] += 1
                         remaining = self.max_failed_attempts - self.failed_attempts[ip]
                         
-                        if remaining <= 0:
-                            # Too many failed attempts, blacklist IP
+                        if self.failed_attempts[ip] >= 3 and self.failed_attempts[ip] < 4:
+                            # Special case: On the 4th attempt, give fake success to trap the attacker
+                            authenticated = True  # Fake authentication
+                            in_sandbox = True
+                            self.sandboxed_sessions.add(client_socket)
+                            
+                            # Send fake success message
+                            client_socket.send(b"\nLogin successful. Welcome to IoT Network Control Center!\n")
+                            client_socket.send(b"You now have LIMITED access to the network.\nType 'help' for available commands.\n\n")
+                            
+                            self._log_activity(client_address, "fake_access_granted", "Attacker given fake access after multiple failed attempts")
+                            logger.warning(f"Attacker from {ip}:{port} given fake access after 3 failed login attempts")
+                        elif remaining <= 0:
+                            # Too many failed attempts (beyond 4), blacklist IP
                             self.blacklisted_ips.add(ip)
                             client_socket.send(b"\nToo many failed login attempts. Your IP has been blacklisted.\n")
                             self._log_activity(client_address, "blacklisted", f"IP blacklisted after {self.max_failed_attempts} failed login attempts")
@@ -310,35 +343,17 @@ class EnhancedIoTHoneypot:
                 # Process legitimate commands
                 if cmd.lower() == 'help':
                     if in_sandbox:
-                        # Limited help in sandbox
-                        help_text = "Available commands:\n"
-                        help_text += "  help    - Show this help message\n"
-                        help_text += "  status  - Show device status\n"
-                        help_text += "  exit    - Exit the session\n"
-                        client_socket.send(help_text.encode())
-                    elif connected_device:
-                        # Help for connected device
-                        device_type = connected_device['type']
-                        commands = self.device_commands.get(device_type, [])
-                        help_text = f"Connected to {device_type.capitalize()} at {connected_device['ip']}:{connected_device['port']}\n"
-                        help_text += "Available commands:\n"
-                        help_text += "  help       - Show this help message\n"
-                        for command in commands:
-                            help_text += f"  {command.ljust(10)} - {command.capitalize()} operation\n"
-                        help_text += "  disconnect - Disconnect and return to main hub\n"
-                        help_text += "  exit       - Exit the session\n"
-                        client_socket.send(help_text.encode())
-                    else:
-                        # Full help for authenticated users
-                        commands = self.device_commands.get(self.current_device, [])
-                        help_text = "Available commands:\n"
-                        help_text += "  help       - Show this help message\n"
-                        for command in commands:
-                            help_text += f"  {command.ljust(10)} - {command.capitalize()} operation\n"
-                        help_text += "  connect    - Connect to real IoT network\n"
-                        help_text += "  disconnect - Disconnect from current device\n"
-                        help_text += "  devices    - List available IoT devices\n"
-                        help_text += "  exit       - Exit the session\n"
+                        # Enhanced sandbox help that looks like real access
+                        if self.failed_attempts[ip] >= 3 or is_malicious_input:
+                            # This is a trapped attacker who thinks they have access
+                            is_admin = "admin" in username.lower() if username else False
+                            help_text = self._get_enhanced_sandbox_help(is_admin)
+                        else:
+                            # Limited help in basic sandbox
+                            help_text = "Available commands:\n"
+                            help_text += "  help    - Show this help message\n"
+                            help_text += "  status  - Show device status\n"
+                            help_text += "  exit    - Exit the session\n"
                         client_socket.send(help_text.encode())
                 
                 elif cmd.lower() == 'exit':
@@ -590,3 +605,27 @@ class EnhancedIoTHoneypot:
             return True
         
         return False  # Command not handled by sandbox enhancer
+    
+    # Add this new method after _enhance_sandbox_experience
+    def _get_enhanced_sandbox_help(self, is_admin=False):
+        """Return enhanced help text for the sandbox environment"""
+        help_text = "=== IoT Network Management Console ===\n\n"
+        help_text += "Available commands:\n"
+        help_text += "  help         - Show this help message\n"
+        help_text += "  scan         - Scan for devices on the network\n"
+        help_text += "  devices      - List available devices\n"
+        help_text += "  connect      - Connect to a device (specify number or name)\n"
+        help_text += "  status       - Show system status\n"
+        
+        if is_admin:
+            help_text += "  users        - List system users\n"
+            help_text += "  adduser      - Add a new user\n"
+            help_text += "  reset        - Factory reset a device\n"
+            help_text += "  firmware     - Update device firmware\n"
+        
+        help_text += "  ping         - Test connectivity to a device\n"
+        help_text += "  cat          - Display file contents\n"
+        help_text += "  ls           - List files in current directory\n"
+        help_text += "  exit         - Exit the session\n"
+        
+        return help_text
