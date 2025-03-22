@@ -544,3 +544,23 @@
 {"timestamp": "2025-03-22T20:00:33.698679", "ip": "127.0.0.1", "port": 47773, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T20:00:36.433908", "ip": "127.0.0.1", "port": 47773, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T20:00:38.270653", "ip": "127.0.0.1", "port": 47773, "type": "command", "details": "Command: exit\\", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:01:25.305501", "ip": "127.0.0.1", "port": 47437, "type": "connection", "details": "New connection to camera", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-22T20:01:37.095592", "ip": "127.0.0.1", "port": 47437, "type": "command", "details": "Command: help", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-22T20:03:10.039007", "ip": "127.0.0.1", "port": 48323, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-22T20:03:19.127480", "ip": "127.0.0.1", "port": 48323, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-22T20:03:21.513530", "ip": "127.0.0.1", "port": 48323, "type": "command", "details": "Command: \u0003exit", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-22T20:05:57.048042", "ip": "127.0.0.1", "port": 47823, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:06:10.399962", "ip": "127.0.0.1", "port": 47823, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:06:14.386514", "ip": "127.0.0.1", "port": 47823, "type": "command", "details": "Command: scan", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:09:01.985369", "ip": "127.0.0.1", "port": 44859, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:09:10.569211", "ip": "127.0.0.1", "port": 44859, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:09:15.907068", "ip": "127.0.0.1", "port": 44859, "type": "command", "details": "Command: devices", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:09:22.564446", "ip": "127.0.0.1", "port": 44859, "type": "command", "details": "Command: connect 1", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:09:28.802625", "ip": "127.0.0.1", "port": 44859, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-22T20:10:52.154891", "ip": "127.0.0.1", "port": 45983, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:11:04.566690", "ip": "127.0.0.1", "port": 45983, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:11:09.798643", "ip": "127.0.0.1", "port": 45983, "type": "command", "details": "Command: on", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:11:12.665933", "ip": "127.0.0.1", "port": 45983, "type": "command", "details": "Command: off", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:11:16.171388", "ip": "127.0.0.1", "port": 45983, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:12:16.658327", "ip": "127.0.0.1", "port": 47949, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T20:12:42.798546", "ip": "127.0.0.1", "port": 48507, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}

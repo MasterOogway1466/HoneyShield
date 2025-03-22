@@ -28,6 +28,8 @@ class SSHServer(paramiko.ServerInterface):
         self.honeypot = honeypot
         self.event = threading.Event()
         self.channel = None
+        self.shell_requested = threading.Event()
+        self.pty_requested = threading.Event()
 
     def check_auth_password(self, username, password):
         if username in self.honeypot.valid_credentials:
@@ -44,14 +46,14 @@ class SSHServer(paramiko.ServerInterface):
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
         
     def check_channel_shell_request(self, channel):
-        self.event.set()
+        self.shell_requested.set()
         return True
         
     def check_channel_pty_request(self, channel, term, width, height, pixelwidth, pixelheight, modes):
+        self.pty_requested.set()
         return True
         
     def check_channel_exec_request(self, channel, command):
-        self.event.set()
         return True
 
     def get_banner(self):
@@ -215,11 +217,9 @@ class EnhancedIoTHoneypot:
             transport = paramiko.Transport(client_socket)
             transport.set_gss_host(socket.getfqdn(""))
             transport.add_server_key(self.host_key)
-            transport.local_version = "SSH-2.0-OpenSSH_8.9p1"  # Mimic OpenSSH
+            transport.local_version = "SSH-2.0-OpenSSH_8.9p1"
             
-            # Initialize server interface
             server = SSHServer(self)
-            
             try:
                 transport.start_server(server=server)
             except paramiko.SSHException as e:
@@ -227,49 +227,57 @@ class EnhancedIoTHoneypot:
                 return
                 
             # Wait for auth
-            server.event.wait(10)
-            if not transport.is_active():
-                logger.warning(f"Client {ip}:{port} never asked for authentication")
-                return
-                
-            # Wait for channel
             channel = transport.accept(20)
             if channel is None:
                 logger.warning(f"No channel from {ip}:{port}")
                 return
                 
-            # Wait for shell request
-            server.event.wait(10)
-            if not server.event.is_set():
+            # Wait for shell/pty request
+            server.shell_requested.wait(10)
+            if not server.shell_requested.is_set():
                 logger.warning(f"Client {ip}:{port} never asked for a shell")
                 return
                 
             # Send welcome message
-            welcome = f"Welcome to IoT Device Management Console\r\n"
-            welcome += f"Type 'help' for available commands\r\n\n"
+            welcome = "Welcome to IoT Device Management Console\r\n"
+            welcome += "Type 'help' for available commands\r\n\n"
             channel.send(welcome)
             
             # Interactive shell loop
             while transport.is_active():
                 channel.send("$ ")
                 command = ""
+                buf = ""
                 
-                # Read command character by character
                 while True:
                     char = channel.recv(1)
                     if not char:  # EOF
                         break
-                    char = char.decode('utf-8', errors='ignore')
-                    if char == '\r':  # Enter
-                        channel.send('\r\n')
-                        break
-                    elif char == '\x7f':  # Backspace
+                        
+                    # Handle special characters
+                    if char == b'\x7f':  # backspace
                         if command:
                             command = command[:-1]
-                            channel.send('\b \b')
+                            channel.send(b'\b \b')  # Move back, erase, move back
+                    elif char == b'\r':  # enter
+                        channel.send(b'\r\n')
+                        break
+                    elif char == b'\x03':  # ctrl-c
+                        channel.send(b'^C\r\n')
+                        command = ""
+                        break
+                    elif char == b'\x04':  # ctrl-d
+                        if not command:
+                            channel.send(b'logout\r\n')
+                            return
                     else:
-                        command += char
-                        channel.send(char.encode())
+                        # Normal character
+                        try:
+                            char_decoded = char.decode('utf-8')
+                            command += char_decoded
+                            channel.send(char)  # Echo back
+                        except UnicodeDecodeError:
+                            continue
                 
                 if not command:  # Empty command
                     continue
@@ -278,9 +286,11 @@ class EnhancedIoTHoneypot:
                     channel.send('Goodbye!\r\n')
                     break
                 
-                # Process command and send response
+                # Process command and format response
                 response = self._process_command(command, client_address)
-                channel.send(response + '\r\n')
+                # Split response into lines and send each with proper line ending
+                for line in response.splitlines():
+                    channel.send(line.rstrip() + '\r\n')  # Ensure consistent line endings
         
         except Exception as e:
             logger.error(f"Error handling SSH client: {str(e)}")
@@ -297,6 +307,14 @@ class EnhancedIoTHoneypot:
         ip, port = client_address
         self._log_activity(client_address, "command", f"Command: {command}")
         
+        # Split command and arguments
+        cmd_parts = command.strip().lower().split()
+        if not cmd_parts:
+            return ""
+            
+        cmd = cmd_parts[0]
+        args = cmd_parts[1:] if len(cmd_parts) > 1 else []
+        
         # Check for malicious commands
         for pattern, attack_type in self.attack_patterns:
             if re.search(pattern, command, re.IGNORECASE):
@@ -305,13 +323,72 @@ class EnhancedIoTHoneypot:
                 return self._get_fake_response_for_attack(attack_type)
         
         # Process legitimate commands
-        if command.lower() == 'help':
+        if cmd == 'help':
             return self._get_enhanced_sandbox_help()
-        elif command.lower() == 'status':
-            return f"Device: {self.current_device}\nStatus: Online\nUptime: {random.randint(1, 24)} hours"
+        elif cmd == 'status':
+            status = []
+            status.append(f"Device: {self.current_device.capitalize()}")
+            status.append(f"Status: Online")
+            status.append(f"Uptime: {random.randint(1, 24)} hours")
+            
+            if self.current_device == "camera":
+                status.append(f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}")
+                status.append(f"Resolution: {random.choice(['720p', '1080p', '4K'])}")
+            elif self.current_device == "thermostat":
+                status.append(f"Temperature: {random.randint(65, 85)}°F")
+                status.append(f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}")
+            elif self.current_device == "smartlock":
+                status.append(f"Lock status: {random.choice(['Locked', 'Unlocked'])}")
+                status.append(f"Battery: {random.randint(50, 100)}%")
+            elif self.current_device == "smart_bulb":
+                status.append(f"State: {random.choice(['On', 'Off'])}")
+                status.append(f"Brightness: {random.randint(0, 100)}%")
+                status.append(f"Color: {random.choice(['Warm White', 'Cool White', 'RGB'])}")
+            
+            return "\n".join(status)
+        elif cmd == 'devices':
+            devices = ["Available devices in network:"]
+            for i, device in enumerate(self.real_iot_devices, 1):
+                devices.append(f"{i}. {device['type'].capitalize()} at {device['ip']}:{device['port']}")
+            return "\n".join(devices)
+        elif cmd == 'connect':
+            if not args:
+                return "Usage: connect <device_number>"
+            try:
+                idx = int(args[0]) - 1
+                if 0 <= idx < len(self.real_iot_devices):
+                    device = self.real_iot_devices[idx]
+                    return f"Connected to {device['type'].capitalize()} at {device['ip']}"
+                else:
+                    return "Invalid device number"
+            except ValueError:
+                return "Invalid device number. Please enter a number."
+        elif cmd == 'scan':
+            scan_results = ["Scanning network..."]
+            for i in range(5):
+                device_ip = f"192.168.1.{random.randint(10, 99)}"
+                device_type = random.choice(self.device_types)
+                scan_results.append(f"{device_ip:<15} - {device_type.capitalize():<12} [{random.choice(['OPEN', 'FILTERED'])}]")
+            return "\n".join(scan_results)
         else:
-            return f"Unknown command: {command}. Type 'help' for available commands."
-    
+            # Check device-specific commands
+            device_commands = self.device_commands.get(self.current_device, [])
+            if cmd in device_commands:
+                response = [f"Executing {cmd} command..."]
+                if cmd == "view" and self.current_device == "camera":
+                    response.append("Streaming video feed...")
+                elif cmd == "temperature" and self.current_device == "thermostat":
+                    response.append(f"Current temperature: {random.randint(65, 85)}°F")
+                elif cmd in ["lock", "unlock"] and self.current_device == "smartlock":
+                    response.append(f"Door {cmd}ed successfully.")
+                elif cmd in ["on", "off"] and self.current_device == "smart_bulb":
+                    response.append(f"Light turned {cmd}.")
+                else:
+                    response.append(f"{cmd.capitalize()} operation completed successfully.")
+                return "\n".join(response)
+                
+            return f"Unknown command: {command}\nType 'help' for available commands."
+
     def _get_fake_response_for_attack(self, attack_type):
         """Generate fake responses for attack attempts"""
         if attack_type == "file_read_attempt":
@@ -415,23 +492,39 @@ class EnhancedIoTHoneypot:
     # Add this new method after _enhance_sandbox_experience
     def _get_enhanced_sandbox_help(self, is_admin=False):
         """Return enhanced help text for the sandbox environment"""
-        help_text = "=== IoT Network Management Console ===\n\n"
-        help_text += "Available commands:\n"
-        help_text += "  help         - Show this help message\n"
-        help_text += "  scan         - Scan for devices on the network\n"
-        help_text += "  devices      - List available devices\n"
-        help_text += "  connect      - Connect to a device (specify number or name)\n"
-        help_text += "  status       - Show system status\n"
+        help_text = [
+            "=== IoT Network Management Console ===\n",
+            "Available commands:",
+            "  help         - Show this help message",
+            "  scan         - Scan for devices on the network",
+            "  devices      - List available devices",
+            "  connect <n>  - Connect to device number <n>",
+            "  status       - Show current device status"
+        ]
+        
+        # Add device-specific commands
+        if self.current_device in self.device_commands:
+            help_text.extend([
+                f"\nDevice-specific commands for {self.current_device}:"
+            ])
+            for cmd in self.device_commands[self.current_device]:
+                help_text.append(f"  {cmd:<12} - Control {self.current_device} {cmd}")
         
         if is_admin:
-            help_text += "  users        - List system users\n"
-            help_text += "  adduser      - Add a new user\n"
-            help_text += "  reset        - Factory reset a device\n"
-            help_text += "  firmware     - Update device firmware\n"
+            help_text.extend([
+                "\nAdmin commands:",
+                "  users        - List system users",
+                "  adduser      - Add a new user",
+                "  reset        - Factory reset a device",
+                "  firmware     - Update device firmware"
+            ])
         
-        help_text += "  ping         - Test connectivity to a device\n"
-        help_text += "  cat          - Display file contents\n"
-        help_text += "  ls           - List files in current directory\n"
-        help_text += "  exit         - Exit the session\n"
+        help_text.extend([
+            "\nSystem commands:",
+            "  ping         - Test connectivity to a device",
+            "  cat          - Display file contents",
+            "  ls           - List files in current directory",
+            "  exit         - Exit the session"
+        ])
         
-        return help_text
+        return "\n".join(help_text)
