@@ -1,0 +1,397 @@
+2025-03-21 18:08:23,599 - __main__ - INFO - Training model using data from data/raw/sample_iot_logs.csv
+2025-03-21 18:08:23,600 - src.preprocessing.data_processor - INFO - Loading data from data/raw/sample_iot_logs.csv
+2025-03-21 18:08:23,623 - src.preprocessing.data_processor - INFO - Loaded data with shape (10000, 11)
+2025-03-21 18:08:23,624 - src.preprocessing.data_processor - INFO - Preprocessing data
+2025-03-21 18:08:23,626 - src.preprocessing.data_processor - INFO - Categorical columns: ['timestamp', 'src_ip', 'dst_ip', 'protocol', 'device_type', 'threat_type']
+2025-03-21 18:08:23,627 - src.preprocessing.data_processor - INFO - Numerical columns: ['port', 'packet_size', 'duration', 'packets']
+2025-03-21 18:08:23,705 - src.preprocessing.data_processor - INFO - Processed training data shape: (7000, 12066)
+2025-03-21 18:08:23,706 - src.preprocessing.data_processor - INFO - Processed test data shape: (3000, 12066)
+2025-03-21 18:08:23,714 - src.preprocessing.data_processor - INFO - Saved processed data to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\data\processed
+2025-03-21 18:08:23,718 - src.model.model_trainer - INFO - Initializing model: random_forest
+2025-03-21 18:08:23,719 - src.model.model_trainer - INFO - Training random_forest model
+2025-03-21 18:08:24,986 - src.model.model_trainer - INFO - Model training completed
+2025-03-21 18:08:24,986 - src.model.model_trainer - INFO - Evaluating model performance
+2025-03-21 18:08:25,137 - src.model.model_trainer - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000, f1=1.0000
+2025-03-21 18:08:25,145 - src.model.model_trainer - INFO - Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:08:25,146 - __main__ - INFO - Model training completed. Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:08:25,146 - __main__ - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000
+2025-03-21 18:13:41,363 - __main__ - INFO - Starting honeypot simulation
+2025-03-21 18:13:41,364 - src.honeypot.honeypot - INFO - Starting honeypot on 192.168.1.100:8080
+2025-03-21 18:13:41,364 - src.honeypot.honeypot - ERROR - Failed to start honeypot: [WinError 10049] The requested address is not valid in its context
+2025-03-21 18:13:41,364 - __main__ - ERROR - Failed to start honeypot
+2025-03-21 18:13:41,365 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 18:18:31,133 - __main__ - INFO - Starting anomaly detection system
+2025-03-21 18:18:31,133 - src.detection.anomaly_detector - INFO - Loading model from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:18:31,144 - src.detection.anomaly_detector - INFO - Model loaded successfully
+2025-03-21 18:18:31,144 - src.detection.anomaly_detector - INFO - Loading preprocessor from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\preprocessor.pkl
+2025-03-21 18:18:31,148 - src.detection.anomaly_detector - INFO - Preprocessor loaded successfully
+2025-03-21 18:18:31,148 - __main__ - INFO - Anomaly detection system is running
+2025-03-21 18:18:31,149 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 18:34:33,875 - __main__ - INFO - Stopping system...
+2025-03-21 18:34:33,876 - __main__ - INFO - System stopped
+2025-03-21 18:34:40,083 - __main__ - INFO - Starting honeypot simulation
+2025-03-21 18:34:40,083 - src.honeypot.honeypot - INFO - Starting honeypot on 127.0.0.1:8080
+2025-03-21 18:34:40,084 - src.honeypot.honeypot - INFO - Honeypot started successfully
+2025-03-21 18:34:40,084 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 18:34:52,883 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:57301
+2025-03-21 18:34:52,885 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:57301
+2025-03-21 18:35:52,904 - src.honeypot.honeypot - INFO - Logged timeout activity from 127.0.0.1:57301
+2025-03-21 18:35:52,904 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:57301
+2025-03-21 18:47:20,407 - __main__ - INFO - Stopping system...
+2025-03-21 18:47:20,408 - __main__ - INFO - System stopped
+2025-03-21 18:47:29,831 - __main__ - INFO - Stopping system...
+2025-03-21 18:47:29,833 - src.honeypot.honeypot - INFO - Stopping honeypot
+2025-03-21 18:47:29,834 - src.honeypot.honeypot - INFO - Honeypot stopped
+2025-03-21 18:47:29,834 - __main__ - INFO - System stopped
+2025-03-21 18:48:09,324 - __main__ - INFO - Training model using data from data/raw/sample_iot_logs.csv
+2025-03-21 18:48:09,325 - src.preprocessing.data_processor - INFO - Loading data from data/raw/sample_iot_logs.csv
+2025-03-21 18:48:09,345 - src.preprocessing.data_processor - INFO - Loaded data with shape (10000, 11)
+2025-03-21 18:48:09,345 - src.preprocessing.data_processor - INFO - Preprocessing data
+2025-03-21 18:48:09,347 - src.preprocessing.data_processor - INFO - Categorical columns: ['timestamp', 'src_ip', 'dst_ip', 'protocol', 'device_type', 'threat_type']
+2025-03-21 18:48:09,348 - src.preprocessing.data_processor - INFO - Numerical columns: ['port', 'packet_size', 'duration', 'packets']
+2025-03-21 18:48:09,410 - src.preprocessing.data_processor - INFO - Processed training data shape: (7000, 12066)
+2025-03-21 18:48:09,410 - src.preprocessing.data_processor - INFO - Processed test data shape: (3000, 12066)
+2025-03-21 18:48:09,415 - src.preprocessing.data_processor - INFO - Saved processed data to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\data\processed
+2025-03-21 18:48:09,419 - src.model.model_trainer - INFO - Initializing model: random_forest
+2025-03-21 18:48:09,419 - src.model.model_trainer - INFO - Training random_forest model
+2025-03-21 18:48:10,311 - src.model.model_trainer - INFO - Model training completed
+2025-03-21 18:48:10,311 - src.model.model_trainer - INFO - Evaluating model performance
+2025-03-21 18:48:10,427 - src.model.model_trainer - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000, f1=1.0000
+2025-03-21 18:48:10,433 - src.model.model_trainer - INFO - Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:48:10,434 - __main__ - INFO - Model training completed. Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:48:10,434 - __main__ - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000
+2025-03-21 18:48:10,436 - __main__ - INFO - Starting honeypot simulation
+2025-03-21 18:48:10,436 - src.honeypot.honeypot - INFO - Starting honeypot on 127.0.0.1:8080
+2025-03-21 18:48:10,437 - src.honeypot.honeypot - INFO - Honeypot started successfully
+2025-03-21 18:48:10,438 - __main__ - INFO - Starting anomaly detection system
+2025-03-21 18:48:10,438 - src.detection.anomaly_detector - INFO - Loading model from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:48:10,463 - src.detection.anomaly_detector - INFO - Model loaded successfully
+2025-03-21 18:48:10,464 - src.detection.anomaly_detector - INFO - Loading preprocessor from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\preprocessor.pkl
+2025-03-21 18:48:10,466 - src.detection.anomaly_detector - INFO - Preprocessor loaded successfully
+2025-03-21 18:48:10,467 - __main__ - INFO - Anomaly detection system is running
+2025-03-21 18:48:10,467 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 18:57:52,345 - __main__ - INFO - Stopping system...
+2025-03-21 18:57:52,345 - src.honeypot.honeypot - INFO - Stopping honeypot
+2025-03-21 18:57:52,345 - src.honeypot.honeypot - INFO - Honeypot stopped
+2025-03-21 18:57:52,346 - __main__ - INFO - System stopped
+2025-03-21 18:57:55,700 - __main__ - INFO - Training model using data from data/raw/sample_iot_logs.csv
+2025-03-21 18:57:55,701 - src.preprocessing.data_processor - INFO - Loading data from data/raw/sample_iot_logs.csv
+2025-03-21 18:57:55,720 - src.preprocessing.data_processor - INFO - Loaded data with shape (10000, 11)
+2025-03-21 18:57:55,721 - src.preprocessing.data_processor - INFO - Preprocessing data
+2025-03-21 18:57:55,726 - src.preprocessing.data_processor - INFO - Categorical columns: ['timestamp', 'src_ip', 'dst_ip', 'protocol', 'device_type', 'threat_type']
+2025-03-21 18:57:55,726 - src.preprocessing.data_processor - INFO - Numerical columns: ['port', 'packet_size', 'duration', 'packets']
+2025-03-21 18:57:55,788 - src.preprocessing.data_processor - INFO - Processed training data shape: (7000, 12066)
+2025-03-21 18:57:55,788 - src.preprocessing.data_processor - INFO - Processed test data shape: (3000, 12066)
+2025-03-21 18:57:55,793 - src.preprocessing.data_processor - INFO - Saved processed data to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\data\processed
+2025-03-21 18:57:55,795 - src.model.model_trainer - INFO - Initializing model: random_forest
+2025-03-21 18:57:55,796 - src.model.model_trainer - INFO - Training random_forest model
+2025-03-21 18:57:56,703 - src.model.model_trainer - INFO - Model training completed
+2025-03-21 18:57:56,703 - src.model.model_trainer - INFO - Evaluating model performance
+2025-03-21 18:57:56,818 - src.model.model_trainer - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000, f1=1.0000
+2025-03-21 18:57:56,824 - src.model.model_trainer - INFO - Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:57:56,824 - __main__ - INFO - Model training completed. Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:57:56,825 - __main__ - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000
+2025-03-21 18:57:56,826 - __main__ - INFO - Starting honeypot simulation
+2025-03-21 18:57:56,827 - src.honeypot.honeypot - INFO - Starting honeypot on 127.0.0.1:8080
+2025-03-21 18:57:56,828 - src.honeypot.honeypot - INFO - Honeypot started successfully
+2025-03-21 18:57:56,828 - __main__ - INFO - Starting anomaly detection system
+2025-03-21 18:57:56,829 - src.detection.anomaly_detector - INFO - Loading model from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 18:57:56,853 - src.detection.anomaly_detector - INFO - Model loaded successfully
+2025-03-21 18:57:56,853 - src.detection.anomaly_detector - INFO - Loading preprocessor from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\preprocessor.pkl
+2025-03-21 18:57:56,857 - src.detection.anomaly_detector - INFO - Preprocessor loaded successfully
+2025-03-21 18:57:56,857 - __main__ - INFO - Anomaly detection system is running
+2025-03-21 18:57:56,859 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 19:25:46,278 - __main__ - INFO - Stopping system...
+2025-03-21 19:25:46,279 - src.honeypot.honeypot - INFO - Stopping honeypot
+2025-03-21 19:25:46,279 - src.honeypot.honeypot - INFO - Honeypot stopped
+2025-03-21 19:25:46,279 - __main__ - INFO - System stopped
+2025-03-21 19:26:01,423 - __main__ - INFO - Training model using data from data/raw/sample_iot_logs.csv
+2025-03-21 19:26:01,423 - src.preprocessing.data_processor - INFO - Loading data from data/raw/sample_iot_logs.csv
+2025-03-21 19:26:01,444 - src.preprocessing.data_processor - INFO - Loaded data with shape (10000, 11)
+2025-03-21 19:26:01,444 - src.preprocessing.data_processor - INFO - Preprocessing data
+2025-03-21 19:26:01,447 - src.preprocessing.data_processor - INFO - Categorical columns: ['timestamp', 'src_ip', 'dst_ip', 'protocol', 'device_type', 'threat_type']
+2025-03-21 19:26:01,448 - src.preprocessing.data_processor - INFO - Numerical columns: ['port', 'packet_size', 'duration', 'packets']
+2025-03-21 19:26:01,510 - src.preprocessing.data_processor - INFO - Processed training data shape: (7000, 12066)
+2025-03-21 19:26:01,510 - src.preprocessing.data_processor - INFO - Processed test data shape: (3000, 12066)
+2025-03-21 19:26:01,516 - src.preprocessing.data_processor - INFO - Saved processed data to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\data\processed
+2025-03-21 19:26:01,519 - src.model.model_trainer - INFO - Initializing model: random_forest
+2025-03-21 19:26:01,519 - src.model.model_trainer - INFO - Training random_forest model
+2025-03-21 19:26:02,520 - src.model.model_trainer - INFO - Model training completed
+2025-03-21 19:26:02,521 - src.model.model_trainer - INFO - Evaluating model performance
+2025-03-21 19:26:02,651 - src.model.model_trainer - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000, f1=1.0000
+2025-03-21 19:26:02,656 - src.model.model_trainer - INFO - Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 19:26:02,656 - __main__ - INFO - Model training completed. Model saved to C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 19:26:02,657 - __main__ - INFO - Model performance: accuracy=1.0000, precision=1.0000, recall=1.0000
+2025-03-21 19:26:02,658 - __main__ - INFO - Starting honeypot simulation
+2025-03-21 19:26:02,659 - src.honeypot.honeypot - INFO - Starting honeypot on 127.0.0.1:8080
+2025-03-21 19:26:02,660 - src.honeypot.honeypot - INFO - Honeypot started successfully
+2025-03-21 19:26:02,660 - __main__ - INFO - Starting anomaly detection system
+2025-03-21 19:26:02,660 - src.detection.anomaly_detector - INFO - Loading model from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\random_forest_model.pkl
+2025-03-21 19:26:02,679 - src.detection.anomaly_detector - INFO - Model loaded successfully
+2025-03-21 19:26:02,679 - src.detection.anomaly_detector - INFO - Loading preprocessor from C:\Users\krish\Documents\Terrathon_stuff\iot-security-anomaly-detection\models\preprocessor.pkl
+2025-03-21 19:26:02,680 - src.detection.anomaly_detector - INFO - Preprocessor loaded successfully
+2025-03-21 19:26:02,681 - __main__ - INFO - Anomaly detection system is running
+2025-03-21 19:26:02,682 - __main__ - INFO - System running. Press Ctrl+C to stop.
+2025-03-21 19:26:16,799 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:58138
+2025-03-21 19:26:16,800 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:58138
+2025-03-21 19:26:31,053 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:58143
+2025-03-21 19:26:31,055 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:58143
+2025-03-21 19:26:31,057 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58143
+2025-03-21 19:26:31,058 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:58143
+2025-03-21 19:26:31,318 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:58144
+2025-03-21 19:26:31,320 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:58144
+2025-03-21 19:26:32,102 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58144
+2025-03-21 19:26:32,102 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:58144
+2025-03-21 19:26:33,079 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:58147
+2025-03-21 19:26:33,081 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:58147
+2025-03-21 19:26:33,084 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58147
+2025-03-21 19:26:33,085 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:58147
+2025-03-21 19:26:33,342 - src.honeypot.honeypot - INFO - Logged connection activity from 127.0.0.1:58148
+2025-03-21 19:26:33,343 - src.honeypot.honeypot - INFO - Handling connection from 127.0.0.1:58148
+2025-03-21 19:26:43,717 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:26:46,641 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:26:49,552 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:26:59,290 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:27:33,349 - src.honeypot.honeypot - INFO - Logged timeout activity from 127.0.0.1:58148
+2025-03-21 19:27:33,350 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:58148
+2025-03-21 19:27:41,821 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:27:56,162 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:28:00,236 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:28:13,015 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:28:15,716 - src.honeypot.honeypot - INFO - Logged data_received activity from 127.0.0.1:58138
+2025-03-21 19:29:15,732 - src.honeypot.honeypot - INFO - Logged timeout activity from 127.0.0.1:58138
+2025-03-21 19:29:15,733 - src.honeypot.honeypot - INFO - Connection closed for 127.0.0.1:58138
+2025-03-21 19:48:52,992 - __main__ - INFO - Stopping system...
+2025-03-21 19:48:52,993 - src.honeypot.honeypot - INFO - Stopping honeypot
+2025-03-21 19:48:52,993 - src.honeypot.honeypot - INFO - Honeypot stopped
+2025-03-21 19:48:52,994 - __main__ - INFO - System stopped
+2025-03-22 14:43:17,177 - __main__ - INFO - Training new ML-IDS model
+2025-03-22 14:43:17,178 - src.ml_integration.train_model - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 14:43:24,283 - src.ml_integration.train_model - INFO - Dataset loaded, shape: (9167581, 59)
+2025-03-22 14:43:43,176 - src.ml_integration.train_model - INFO - Prepared features, shape: (9167581, 57)
+2025-03-22 14:43:43,346 - src.ml_integration.train_model - INFO - Label distribution: {1: 9167581}
+2025-03-22 14:43:52,348 - src.ml_integration.train_model - INFO - Creating and fitting preprocessing pipeline
+2025-03-22 14:47:19,884 - src.ml_integration.train_model - INFO - Training CatBoost model
+2025-03-22 14:56:04,250 - __main__ - INFO - Training new ML-IDS model
+2025-03-22 14:56:04,251 - src.ml_integration.train_model - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 14:56:08,236 - src.ml_integration.train_model - INFO - Dataset loaded, shape: (9167581, 59)
+2025-03-22 14:56:08,237 - src.ml_integration.train_model - INFO - Dataset shape: (9167581, 59)
+2025-03-22 14:56:08,237 - src.ml_integration.train_model - INFO - Dataset columns: ['Flow Duration', 'Total Fwd Packets', 'Total Backward Packets', 'Fwd Packets Length Total', 'Bwd Packets Length Total', 'Fwd Packet Length Max', 'Fwd Packet Length Mean', 'Fwd Packet Length Std', 'Bwd Packet Length Max', 'Bwd Packet Length Mean', 'Bwd Packet Length Std', 'Flow Bytes/s', 'Flow Packets/s', 'Flow IAT Mean', 'Flow IAT Std', 'Flow IAT Max', 'Flow IAT Min', 'Fwd IAT Total', 'Fwd IAT Mean', 'Fwd IAT Std', 'Fwd IAT Max', 'Fwd IAT Min', 'Bwd IAT Total', 'Bwd IAT Mean', 'Bwd IAT Std', 'Bwd IAT Max', 'Bwd IAT Min', 'Fwd PSH Flags', 'Fwd Header Length', 'Bwd Header Length', 'Fwd Packets/s', 'Bwd Packets/s', 'Packet Length Max', 'Packet Length Mean', 'Packet Length Std', 'Packet Length Variance', 'SYN Flag Count', 'URG Flag Count', 'Avg Packet Size', 'Avg Fwd Segment Size', 'Avg Bwd Segment Size', 'Subflow Fwd Packets', 'Subflow Fwd Bytes', 'Subflow Bwd Packets', 'Subflow Bwd Bytes', 'Init Fwd Win Bytes', 'Init Bwd Win Bytes', 'Fwd Act Data Packets', 'Fwd Seg Size Min', 'Active Mean', 'Active Std', 'Active Max', 'Active Min', 'Idle Mean', 'Idle Std', 'Idle Max', 'Idle Min', 'Label', 'ClassLabel']
+2025-03-22 14:56:08,242 - src.ml_integration.train_model - INFO - Found potential label column: Label
+2025-03-22 14:56:08,509 - src.ml_integration.train_model - INFO - Value counts: {'Benign': 7186189, 'DDoS-LOIC-HTTP': 575364, 'DoS-Hulk': 318740, 'DDoS-HOIC': 198861, 'Botnet': 145968, 'DDoS': 128062, 'DDoS-NTP': 121328, 'DDoS-TFTP': 98833, 'Bruteforce-SSH': 97260, 'Infiltration': 94857, 'DoS-Goldeneye': 52324, 'DDoS-Syn': 47757, 'DDoS-UDP': 28863, 'DoS-Slowloris': 15243, 'DDoS-MSSQL': 11784, 'DDoS-UDPLag': 8452, 'Bruteforce-FTP': 5984, 'DoS-Slowhttptest': 5271, 'DDoS-Ddossim': 5115, 'DDoS-DNS': 3668, 'DoS-Slowread': 2786, 'Portscan': 2255, 'DDoS-LDAP': 2092, 'Webattack-bruteforce': 2020, 'DDoS-SNMP': 2017, 'DDoS-Slowloris': 1858, 'DoS-Slowheaders': 1649, 'Webattack-XSS': 876, 'DoS-Rudy': 699, 'DDoS-NetBIOS': 675, 'DoS-Slowbody': 621, 'Webattack-SQLi': 99, 'DoS-Heartbleed': 11}
+2025-03-22 14:56:08,510 - src.ml_integration.train_model - INFO - First 3 rows of data:
+2025-03-22 14:56:08,512 - src.ml_integration.train_model - INFO - Row 0: {'Flow Duration': 4, 'Total Fwd Packets': 2, 'Total Backward Packets': 0, 'Fwd Packets Length Total': 12.0, 'Bwd Packets Length Total': 0.0, 'Fwd Packet Length Max': 6.0, 'Fwd Packet Length Mean': 6.0, 'Fwd Packet Length Std': 0.0, 'Bwd Packet Length Max': 0.0, 'Bwd Packet Length Mean': 0.0, 'Bwd Packet Length Std': 0.0, 'Flow Bytes/s': 3000000.0, 'Flow Packets/s': 500000.0, 'Flow IAT Mean': 4.0, 'Flow IAT Std': 0.0, 'Flow IAT Max': 4.0, 'Flow IAT Min': 4.0, 'Fwd IAT Total': 4.0, 'Fwd IAT Mean': 4.0, 'Fwd IAT Std': 0.0, 'Fwd IAT Max': 4.0, 'Fwd IAT Min': 4.0, 'Bwd IAT Total': 0.0, 'Bwd IAT Mean': 0.0, 'Bwd IAT Std': 0.0, 'Bwd IAT Max': 0.0, 'Bwd IAT Min': 0.0, 'Fwd PSH Flags': 0, 'Fwd Header Length': 40, 'Bwd Header Length': 0, 'Fwd Packets/s': 500000.0, 'Bwd Packets/s': 0.0, 'Packet Length Max': 6.0, 'Packet Length Mean': 6.0, 'Packet Length Std': 0.0, 'Packet Length Variance': 0.0, 'SYN Flag Count': 0, 'URG Flag Count': 1, 'Avg Packet Size': 9.0, 'Avg Fwd Segment Size': 6.0, 'Avg Bwd Segment Size': 0.0, 'Subflow Fwd Packets': 2, 'Subflow Fwd Bytes': 12, 'Subflow Bwd Packets': 0, 'Subflow Bwd Bytes': 0, 'Init Fwd Win Bytes': 329, 'Init Bwd Win Bytes': -1, 'Fwd Act Data Packets': 1, 'Fwd Seg Size Min': 20, 'Active Mean': 0.0, 'Active Std': 0.0, 'Active Max': 0.0, 'Active Min': 0.0, 'Idle Mean': 0.0, 'Idle Std': 0.0, 'Idle Max': 0.0, 'Idle Min': 0.0, 'Label': 'Benign', 'ClassLabel': 'Benign'}
+2025-03-22 14:56:08,514 - src.ml_integration.train_model - INFO - Row 1: {'Flow Duration': 1, 'Total Fwd Packets': 2, 'Total Backward Packets': 0, 'Fwd Packets Length Total': 12.0, 'Bwd Packets Length Total': 0.0, 'Fwd Packet Length Max': 6.0, 'Fwd Packet Length Mean': 6.0, 'Fwd Packet Length Std': 0.0, 'Bwd Packet Length Max': 0.0, 'Bwd Packet Length Mean': 0.0, 'Bwd Packet Length Std': 0.0, 'Flow Bytes/s': 12000000.0, 'Flow Packets/s': 2000000.0, 'Flow IAT Mean': 1.0, 'Flow IAT Std': 0.0, 'Flow IAT Max': 1.0, 'Flow IAT Min': 1.0, 'Fwd IAT Total': 1.0, 'Fwd IAT Mean': 1.0, 'Fwd IAT Std': 0.0, 'Fwd IAT Max': 1.0, 'Fwd IAT Min': 1.0, 'Bwd IAT Total': 0.0, 'Bwd IAT Mean': 0.0, 'Bwd IAT Std': 0.0, 'Bwd IAT Max': 0.0, 'Bwd IAT Min': 0.0, 'Fwd PSH Flags': 0, 'Fwd Header Length': 40, 'Bwd Header Length': 0, 'Fwd Packets/s': 2000000.0, 'Bwd Packets/s': 0.0, 'Packet Length Max': 6.0, 'Packet Length Mean': 6.0, 'Packet Length Std': 0.0, 'Packet Length Variance': 0.0, 'SYN Flag Count': 0, 'URG Flag Count': 1, 'Avg Packet Size': 9.0, 'Avg Fwd Segment Size': 6.0, 'Avg Bwd Segment Size': 0.0, 'Subflow Fwd Packets': 2, 'Subflow Fwd Bytes': 12, 'Subflow Bwd Packets': 0, 'Subflow Bwd Bytes': 0, 'Init Fwd Win Bytes': 329, 'Init Bwd Win Bytes': -1, 'Fwd Act Data Packets': 1, 'Fwd Seg Size Min': 20, 'Active Mean': 0.0, 'Active Std': 0.0, 'Active Max': 0.0, 'Active Min': 0.0, 'Idle Mean': 0.0, 'Idle Std': 0.0, 'Idle Max': 0.0, 'Idle Min': 0.0, 'Label': 'Benign', 'ClassLabel': 'Benign'}
+2025-03-22 14:56:08,515 - src.ml_integration.train_model - INFO - Row 2: {'Flow Duration': 3, 'Total Fwd Packets': 2, 'Total Backward Packets': 0, 'Fwd Packets Length Total': 12.0, 'Bwd Packets Length Total': 0.0, 'Fwd Packet Length Max': 6.0, 'Fwd Packet Length Mean': 6.0, 'Fwd Packet Length Std': 0.0, 'Bwd Packet Length Max': 0.0, 'Bwd Packet Length Mean': 0.0, 'Bwd Packet Length Std': 0.0, 'Flow Bytes/s': 4000000.0, 'Flow Packets/s': 666666.666666667, 'Flow IAT Mean': 3.0, 'Flow IAT Std': 0.0, 'Flow IAT Max': 3.0, 'Flow IAT Min': 3.0, 'Fwd IAT Total': 3.0, 'Fwd IAT Mean': 3.0, 'Fwd IAT Std': 0.0, 'Fwd IAT Max': 3.0, 'Fwd IAT Min': 3.0, 'Bwd IAT Total': 0.0, 'Bwd IAT Mean': 0.0, 'Bwd IAT Std': 0.0, 'Bwd IAT Max': 0.0, 'Bwd IAT Min': 0.0, 'Fwd PSH Flags': 0, 'Fwd Header Length': 40, 'Bwd Header Length': 0, 'Fwd Packets/s': 666666.6875, 'Bwd Packets/s': 0.0, 'Packet Length Max': 6.0, 'Packet Length Mean': 6.0, 'Packet Length Std': 0.0, 'Packet Length Variance': 0.0, 'SYN Flag Count': 0, 'URG Flag Count': 1, 'Avg Packet Size': 9.0, 'Avg Fwd Segment Size': 6.0, 'Avg Bwd Segment Size': 0.0, 'Subflow Fwd Packets': 2, 'Subflow Fwd Bytes': 12, 'Subflow Bwd Packets': 0, 'Subflow Bwd Bytes': 0, 'Init Fwd Win Bytes': 245, 'Init Bwd Win Bytes': -1, 'Fwd Act Data Packets': 1, 'Fwd Seg Size Min': 20, 'Active Mean': 0.0, 'Active Std': 0.0, 'Active Max': 0.0, 'Active Min': 0.0, 'Idle Mean': 0.0, 'Idle Std': 0.0, 'Idle Max': 0.0, 'Idle Min': 0.0, 'Label': 'Benign', 'ClassLabel': 'Benign'}
+2025-03-22 14:56:10,585 - src.ml_integration.train_model - INFO - Using 'Label' column, distribution: {0: 7186189, 1: 1981392}
+2025-03-22 14:56:12,123 - src.ml_integration.train_model - INFO - Removing non-numeric columns: ['ClassLabel']
+2025-03-22 14:56:23,281 - src.ml_integration.train_model - INFO - Final features shape: (9167581, 57)
+2025-03-22 14:56:23,361 - src.ml_integration.train_model - INFO - Final label distribution: {0: 7186189, 1: 1981392}
+2025-03-22 14:56:33,012 - src.ml_integration.train_model - INFO - Creating and fitting preprocessing pipeline
+2025-03-22 14:58:34,857 - src.ml_integration.train_model - INFO - Training CatBoost model
+2025-03-22 15:00:09,959 - src.ml_integration.train_model - INFO - Saving model to models\catboost_model.cbm
+2025-03-22 15:00:09,967 - src.ml_integration.train_model - INFO - Saving preprocessing pipeline to models\preprocessing_pipeline.pkl
+2025-03-22 15:00:09,982 - src.ml_integration.train_model - INFO - Saving column configuration to models\column_config.pkl
+2025-03-22 15:00:10,454 - src.ml_integration.train_model - INFO - Model accuracy: 0.9847
+2025-03-22 15:00:10,894 - __main__ - INFO - Model trained with accuracy: 0.9847
+2025-03-22 15:01:16,339 - __main__ - INFO - Initializing ML-IDS model adapter...
+2025-03-22 15:01:16,341 - src.ml_integration.model_adapter - INFO - Model loaded from models/catboost_model.cbm
+2025-03-22 15:01:16,341 - src.ml_integration.model_adapter - INFO - Preprocessing pipeline loaded from models/preprocessing_pipeline.pkl
+2025-03-22 15:01:16,343 - src.ml_integration.model_adapter - INFO - Column configuration loaded from models/column_config.pkl
+2025-03-22 15:01:16,343 - __main__ - INFO - Initializing data simulator...
+2025-03-22 15:01:16,343 - __main__ - INFO - Starting real-time traffic simulation...
+2025-03-22 15:01:16,344 - src.ml_integration.data_simulator - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 15:01:19,697 - src.ml_integration.data_simulator - INFO - Dataset loaded successfully: 9167581 rows
+2025-03-22 15:08:38,749 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:39,303 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:39,840 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:40,373 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:40,906 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:41,453 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:41,973 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:42,492 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:43,010 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:43,530 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:44,051 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:44,558 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:45,066 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:45,580 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:46,091 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:46,613 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:47,125 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:47,633 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:48,140 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:48,648 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:49,160 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:49,673 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:50,181 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:50,690 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:51,202 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:51,714 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:52,222 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:52,736 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:53,247 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:53,766 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:54,274 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:54,780 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:55,288 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:55,799 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:56,310 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:56,821 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:57,330 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:57,846 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:58,355 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:58,867 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:59,379 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:08:59,892 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:00,400 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:00,911 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:01,420 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:01,928 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:02,440 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:02,951 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:03,457 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:03,971 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:09:44,996 - __main__ - INFO - 
+===== Simulation Summary =====
+2025-03-22 15:09:44,996 - __main__ - INFO - Total packets processed: 50
+2025-03-22 15:09:44,997 - __main__ - INFO - Benign packets: 50 (100.00%)
+2025-03-22 15:09:44,998 - __main__ - INFO - Malicious packets: 0 (0.00%)
+2025-03-22 15:36:29,743 - __main__ - INFO - Initializing ML-IDS model adapter...
+2025-03-22 15:36:29,756 - src.ml_integration.model_adapter - INFO - Model loaded from models/catboost_model.cbm
+2025-03-22 15:36:29,758 - src.ml_integration.model_adapter - INFO - Preprocessing pipeline loaded from models/preprocessing_pipeline.pkl
+2025-03-22 15:36:29,759 - src.ml_integration.model_adapter - INFO - Column configuration loaded from models/column_config.pkl
+2025-03-22 15:36:29,759 - __main__ - INFO - Initializing data simulator...
+2025-03-22 15:36:29,759 - __main__ - INFO - Starting real-time traffic simulation...
+2025-03-22 15:36:29,759 - src.ml_integration.data_simulator - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 15:36:35,564 - src.ml_integration.data_simulator - INFO - Dataset loaded successfully: 9167581 rows
+2025-03-22 15:40:33,313 - src.ml_integration.data_simulator - ERROR - Error in traffic simulation: 'MLIDSModelAdapter' object has no attribute 'predict_proba'
+2025-03-22 15:40:53,194 - __main__ - INFO - 
+===== Simulation Summary =====
+2025-03-22 15:40:53,194 - __main__ - INFO - Total packets processed: 0
+2025-03-22 15:43:11,103 - __main__ - INFO - Initializing ML-IDS model adapter...
+2025-03-22 15:43:11,114 - src.ml_integration.model_adapter - INFO - Model loaded from models/catboost_model.cbm
+2025-03-22 15:43:11,116 - src.ml_integration.model_adapter - INFO - Preprocessing pipeline loaded from models/preprocessing_pipeline.pkl
+2025-03-22 15:43:11,116 - src.ml_integration.model_adapter - INFO - Column configuration loaded from models/column_config.pkl
+2025-03-22 15:43:11,116 - __main__ - INFO - Initializing data simulator...
+2025-03-22 15:43:11,117 - __main__ - INFO - Starting real-time traffic simulation...
+2025-03-22 15:43:11,117 - src.ml_integration.data_simulator - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 15:43:14,231 - src.ml_integration.data_simulator - INFO - Dataset loaded successfully: 9167581 rows
+2025-03-22 15:48:02,479 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:03,034 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:03,545 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:04,063 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:04,576 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:05,103 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:05,614 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:06,132 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:06,644 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:07,157 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:07,675 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:08,187 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:08,695 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:09,208 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:09,717 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:10,226 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:10,735 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:11,249 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:11,761 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:12,280 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:12,791 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:13,305 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:13,815 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:14,333 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:14,841 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:15,349 - __main__ - WARNING - [MALICIOUS] Traffic detected from unknown to unknown (Confidence: 0.3891)
+2025-03-22 15:48:15,862 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:16,372 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:16,881 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:17,392 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:17,898 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:18,407 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:18,917 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:19,433 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:19,943 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:20,449 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:20,957 - __main__ - WARNING - [MALICIOUS] Traffic detected from unknown to unknown (Confidence: 0.3479)
+2025-03-22 15:48:21,472 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:21,984 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:22,496 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:23,006 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:23,517 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:24,024 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:24,532 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:25,047 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:25,555 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:26,078 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:26,591 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:27,101 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:27,613 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:48:51,251 - __main__ - INFO - 
+===== Simulation Summary =====
+2025-03-22 15:48:51,251 - __main__ - INFO - Total packets processed: 50
+2025-03-22 15:48:51,252 - __main__ - INFO - Benign packets: 48 (96.00%)
+2025-03-22 15:48:51,252 - __main__ - INFO - Malicious packets: 2 (4.00%)
+2025-03-22 15:54:37,109 - __main__ - INFO - Initializing ML-IDS model adapter...
+2025-03-22 15:54:37,122 - src.ml_integration.model_adapter - INFO - Model loaded from models/catboost_model.cbm
+2025-03-22 15:54:37,123 - src.ml_integration.model_adapter - INFO - Preprocessing pipeline loaded from models/preprocessing_pipeline.pkl
+2025-03-22 15:54:37,124 - src.ml_integration.model_adapter - INFO - Column configuration loaded from models/column_config.pkl
+2025-03-22 15:54:37,124 - __main__ - INFO - Initializing data simulator...
+2025-03-22 15:54:37,124 - __main__ - INFO - Starting real-time traffic simulation...
+2025-03-22 15:54:37,124 - src.ml_integration.data_simulator - INFO - Loading dataset from ../../cic-ids/cic-collection.parquet
+2025-03-22 15:54:40,698 - src.ml_integration.data_simulator - INFO - Dataset loaded successfully: 9167581 rows
+2025-03-22 15:59:54,625 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:55,149 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:55,661 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:56,170 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:56,683 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:57,202 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:57,713 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:58,229 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:58,739 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:59,253 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 15:59:59,762 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:00,277 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:00,787 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:01,300 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:01,816 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:02,327 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:02,843 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:03,355 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:03,866 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:04,381 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:04,894 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:05,407 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:05,923 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:06,441 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:06,959 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:07,487 - __main__ - WARNING - [MALICIOUS] Traffic detected from unknown to unknown (Confidence: 0.3891)
+2025-03-22 16:00:07,994 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:08,511 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:09,035 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:09,548 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:10,065 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:10,583 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:11,098 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:11,611 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:12,130 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:12,648 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:13,165 - __main__ - WARNING - [MALICIOUS] Traffic detected from unknown to unknown (Confidence: 0.3479)
+2025-03-22 16:00:13,676 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:14,193 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:14,710 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:15,225 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:15,735 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:16,253 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:16,762 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:17,278 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:17,793 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:18,308 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:18,828 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:19,342 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:19,851 - __main__ - INFO - [BENIGN] Traffic from unknown to unknown
+2025-03-22 16:00:44,331 - __main__ - INFO - 
+===== Simulation Summary =====
+2025-03-22 16:00:44,332 - __main__ - INFO - Total packets processed: 50
+2025-03-22 16:00:44,332 - __main__ - INFO - Benign packets: 48 (96.00%)
+2025-03-22 16:00:44,332 - __main__ - INFO - Malicious packets: 2 (4.00%)
