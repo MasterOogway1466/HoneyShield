@@ -575,3 +575,72 @@
 {"timestamp": "2025-03-23T00:04:22.040097", "ip": "127.0.0.1", "port": 47181, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-23T00:04:27.701744", "ip": "127.0.0.1", "port": 47611, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-23T00:04:33.509886", "ip": "127.0.0.1", "port": 47621, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:16:57.742196", "ip": "127.0.0.1", "port": 47709, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:11.473959", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:21.892742", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: \u001b[A\u001b[Bscan", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:27.207811", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:42.494083", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: connect 1", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:46.049486", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:17:56.821388", "ip": "127.0.0.1", "port": 47709, "type": "command", "details": "Command: status", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:22:45.451833", "ip": "127.0.0.1", "port": 44797, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:22:52.284716", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:23:00.601007", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: status", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:23:06.377220", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: scan", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:23:12.303308", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: devices", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:23:20.747294", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: devices", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:23:28.211994", "ip": "127.0.0.1", "port": 44797, "type": "command", "details": "Command: connect 3", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:26:56.471055", "ip": "127.0.0.1", "port": 45679, "type": "connection", "details": "New connection to thermostat", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:27:10.785510", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: help", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:27:15.150727", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: scan", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:27:18.095243", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: devices", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:27:25.407282", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: connect 1", "device": "thermostat", "label": "info"}
+{"timestamp": "2025-03-23T01:27:31.332182", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: status", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:27:34.206358", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: help", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:27:43.515624", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: night_vision on", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:27:59.393505", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: \u001b[A\u001b[Bnoght_vision off\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[i", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:28:10.001101", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: \u001b[A\u001b[Bnight_vision off", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:28:24.432937", "ip": "127.0.0.1", "port": 45679, "type": "command", "details": "Command: night_vision off", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:35:56.726437", "ip": "127.0.0.1", "port": 45475, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:05.260623", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:13.160379", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:12.808049", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: scan", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:14.094076", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:21.864928", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:26.571700", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: devices", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:30.207323", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: connect 4", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:33.805832", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: connect 3", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:36:39.516659", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: status", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:36:46.116969", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:36:54.234217", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: ls", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:37:02.102466", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: ping 1.1.1.1", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:37:02.102734", "ip": "127.0.0.1", "port": 45475, "type": "attack_detected", "details": "Attack type: network_scan_attempt", "device": "smartlock", "label": "threat"}
+{"timestamp": "2025-03-23T01:37:05.862325", "ip": "127.0.0.1", "port": 45475, "type": "command", "details": "Command: clear", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:38:53.694786", "ip": "127.0.0.1", "port": 46259, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:39:05.560863", "ip": "127.0.0.1", "port": 46259, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:39:16.285236", "ip": "127.0.0.1", "port": 46259, "type": "command", "details": "Command: devices", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:39:22.107542", "ip": "127.0.0.1", "port": 46259, "type": "command", "details": "Command: status", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T01:45:04.691333", "ip": "127.0.0.1", "port": 45165, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:45:15.353726", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:45:23.721645", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:45:28.087010", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: connect 1", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T01:45:30.758694", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: help", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:46:01.438152", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: snapshot", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:46:03.282588", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command: snapshot", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:46:05.831031", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command:  rotate", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:46:10.445688", "ip": "127.0.0.1", "port": 45165, "type": "command", "details": "Command:  rotate 200", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:46:43.771112", "ip": "127.0.0.1", "port": 45085, "type": "connection", "details": "New connection to camera", "device": "camera", "label": "info"}
+{"timestamp": "2025-03-23T01:52:19.138225", "ip": "192.168.5.201", "port": 58794, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:52:29.061580", "ip": "192.168.5.131", "port": 54400, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:52:50.206509", "ip": "192.168.5.201", "port": 58794, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:52:50.546233", "ip": "192.168.5.131", "port": 54400, "type": "command", "details": "Command: help", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:52:52.901521", "ip": "192.168.5.201", "port": 58794, "type": "command", "details": "Command: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:53:12.220248", "ip": "192.168.5.131", "port": 54400, "type": "command", "details": "Command: scan", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:53:12.178069", "ip": "192.168.5.201", "port": 58794, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:53:16.064799", "ip": "192.168.5.201", "port": 58794, "type": "command", "details": "Command: devices", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:05.178363", "ip": "192.168.5.201", "port": 58794, "type": "command", "details": "Command: connect", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:11.025990", "ip": "192.168.5.131", "port": 54486, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:18.326308", "ip": "192.168.5.131", "port": 54489, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:20.376453", "ip": "192.168.5.131", "port": 0, "type": "blacklisted", "details": "IP blacklisted after 4 failed login attempts", "device": "smartlock", "label": "threat"}
+{"timestamp": "2025-03-23T01:54:21.696742", "ip": "192.168.5.131", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:22.832988", "ip": "192.168.5.131", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T01:54:25.523026", "ip": "192.168.5.131", "port": 54491, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smartlock", "label": "info"}

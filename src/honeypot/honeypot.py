@@ -8,7 +8,7 @@ import json
 import time
 import re
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 from collections import defaultdict
 
 # Add parent directory to path
@@ -155,12 +155,131 @@ class EnhancedIoTHoneypot:
         
         # Attack detection patterns
         self.attack_patterns = [
-            (r"^\s*(cat|head|tail|more|less)\s+(/etc/passwd|/etc/shadow)", "file_read_attempt"),
-            (r"^\s*(wget|curl)\s+http", "download_attempt"),
-            (r"^\s*(sh|bash|nc|netcat)\s+-", "shell_attempt"),
-            (r"^\s*(ps|netstat|ifconfig|ip addr)", "system_info_attempt"),
-            (r"^\s*(nmap|ping)\s+", "network_scan_attempt")
+            (r"^\s*(factory_reset|flash|root)\s*", "device_tampering_attempt"),
+            (r"^\s*(sniff|capture|intercept)\s*", "traffic_sniffing_attempt"),
+            (r"^\s*(brute|crack|exploit)\s*", "authentication_bypass_attempt")
         ]
+
+        # Enhanced device state tracking
+        self.device_states = {
+            "camera": {
+                "status": "online",
+                "recording": False,
+                "resolution": "1080p",
+                "motion_detection": True,
+                "rotation": 0,  # degrees
+                "night_vision": False,
+                "stream_url": "rtsp://192.168.1.101/live",
+                "snapshots_taken": 0
+            },
+            "thermostat": {
+                "status": "online",
+                "current_temp": 72,
+                "target_temp": 70,
+                "mode": "auto",  # auto, heat, cool, off
+                "humidity": 45,
+                "schedule": {
+                    "morning": {"time": "06:00", "temp": 72},
+                    "day": {"time": "09:00", "temp": 70},
+                    "evening": {"time": "17:00", "temp": 73},
+                    "night": {"time": "22:00", "temp": 68}
+                },
+                "fan": "auto",  # auto, on, circulate
+                "energy_mode": "normal"  # normal, eco, away
+            }
+        }
+
+        # Enhanced device-specific commands and help text
+        self.device_commands = {
+            "camera": {
+                "view": "Start live video stream",
+                "record": "Start/stop recording",
+                "snapshot": "Take a snapshot",
+                "rotate": "Rotate camera (0-360 degrees)",
+                "night_vision": "Toggle night vision",
+                "motion_detection": "Toggle motion detection",
+                "resolution": "Set video resolution",
+                "status": "Show camera status"
+            },
+            "thermostat": {
+                "temperature": "Get current temperature",
+                "set": "Set target temperature",
+                "mode": "Set operation mode (auto/heat/cool/off)",
+                "schedule": "View/edit temperature schedule",
+                "humidity": "Get current humidity",
+                "fan": "Control fan settings",
+                "eco": "Toggle energy saving mode",
+                "status": "Show thermostat status"
+            }
+        }
+        
+        # Command argument specifications
+        self.command_args = {
+            "camera": {
+                "rotate": ["angle"],
+                "resolution": ["quality"],
+                "record": ["duration"],
+            },
+            "thermostat": {
+                "set": ["temperature"],
+                "mode": ["mode"],
+                "fan": ["setting"],
+                "schedule": ["time", "temp"],
+            }
+        }
+
+        # Enhanced device list with more details
+        self.available_devices = [
+            {
+                "id": 1,
+                "ip": "192.168.1.101",
+                "type": "camera",
+                "model": "Hikvision DS-2CD2385G1",
+                "status": "online",
+                "firmware": "v2.3.4",
+                "last_seen": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            },
+            {
+                "id": 2,
+                "ip": "192.168.1.102",
+                "type": "thermostat",
+                "model": "Nest Learning v3",
+                "status": "online",
+                "firmware": "v5.6.7",
+                "last_seen": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            },
+            {
+                "id": 3,
+                "ip": "192.168.1.103",
+                "type": "smartlock",
+                "model": "August Wi-Fi",
+                "status": "online",
+                "firmware": "v1.2.8",
+                "last_seen": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            },
+            {
+                "id": 4,
+                "ip": "192.168.1.104",
+                "type": "camera",
+                "model": "Arlo Pro 4",
+                "status": "offline",
+                "firmware": "v3.2.1",
+                "last_seen": (datetime.now() - timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M:%S")
+            },
+            {
+                "id": 5,
+                "ip": "192.168.1.105",
+                "type": "thermostat",
+                "model": "Ecobee SmartThermostat",
+                "status": "online",
+                "firmware": "v4.5.3",
+                "last_seen": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+        ]
+        
+        # Command history tracking per client
+        self.client_command_history = {}  # Maps client address to list of commands
+        self.client_history_index = {}    # Maps client address to current history index
     
     def start(self):
         """Start the honeypot server"""
@@ -241,6 +360,11 @@ class EnhancedIoTHoneypot:
         ip, port = client_address
         logger.info(f"SSH connection from {ip}:{port}")
         
+        # Initialize command history for this client
+        client_id = f"{ip}:{port}"
+        self.client_command_history[client_id] = []
+        self.client_history_index[client_id] = 0
+        
         try:
             # Set up SSH transport
             transport = paramiko.Transport(client_socket)
@@ -272,39 +396,157 @@ class EnhancedIoTHoneypot:
             welcome += "Type 'help' for available commands\r\n\n"
             channel.send(welcome)
             
-            # Interactive shell loop
+            # Interactive shell loop with command history
             while transport.is_active():
                 channel.send("$ ")
                 command = ""
-                buf = ""
+                cursor_pos = 0
+                history = self.client_command_history[client_id]
+                history_index = len(history)
+                self.client_history_index[client_id] = history_index
                 
                 while True:
                     char = channel.recv(1)
                     if not char:  # EOF
                         break
                         
-                    # Handle special characters
-                    if char == b'\x7f':  # backspace
-                        if command:
-                            command = command[:-1]
-                            channel.send(b'\b \b')  # Move back, erase, move back
+                    # Handle special characters and escape sequences
+                    if char == b'\x1b':  # ESC sequence
+                        # Read the next two characters that complete the arrow key sequence
+                        next_chars = channel.recv(2)
+                        if next_chars == b'[A':  # Up arrow
+                            # Clear current line
+                            channel.send(b'\r')
+                            channel.send(b'$ ')
+                            channel.send(b' ' * len(command))
+                            channel.send(b'\r')
+                            channel.send(b'$ ')
+                            
+                            # Get previous command from history
+                            if history_index > 0:
+                                history_index -= 1
+                                command = history[history_index] if history else ""
+                                cursor_pos = len(command)
+                                channel.send(command.encode())
+                                
+                        elif next_chars == b'[B':  # Down arrow
+                            # Clear current line
+                            channel.send(b'\r')
+                            channel.send(b'$ ')
+                            channel.send(b' ' * len(command))
+                            channel.send(b'\r')
+                            channel.send(b'$ ')
+                            
+                            # Get next command from history
+                            if history_index < len(history):
+                                history_index += 1
+                                if history_index < len(history):
+                                    command = history[history_index]
+                                else:
+                                    command = ""
+                                cursor_pos = len(command)
+                                channel.send(command.encode())
+                                
+                        elif next_chars == b'[C':  # Right arrow
+                            if cursor_pos < len(command):
+                                cursor_pos += 1
+                                channel.send(b'\x1b[C')
+                                
+                        elif next_chars == b'[D':  # Left arrow
+                            if cursor_pos > 0:
+                                cursor_pos -= 1
+                                channel.send(b'\x1b[D')
+                                
+                        elif next_chars == b'[3':  # Delete key first part
+                            third_char = channel.recv(1)
+                            if third_char == b'~':  # Delete key
+                                if cursor_pos < len(command):
+                                    # Remove character at cursor position
+                                    command = command[:cursor_pos] + command[cursor_pos + 1:]
+                                    # Redraw the line from cursor position
+                                    remainder = command[cursor_pos:]
+                                    channel.send(remainder.encode() + b' ' + b'\x1b[D' * len(remainder))
+                            
+                    elif char == b'\x7f':  # backspace
+                        if cursor_pos > 0:
+                            # Remove character before cursor
+                            command = command[:cursor_pos-1] + command[cursor_pos:]
+                            cursor_pos -= 1
+                            
+                            # Move cursor back
+                            channel.send(b'\x1b[D')
+                            
+                            # Redraw rest of the line
+                            if cursor_pos < len(command):
+                                remainder = command[cursor_pos:]
+                                channel.send(remainder.encode() + b' ' + b'\x1b[D' * len(remainder))
+                            else:
+                                channel.send(b' ' + b'\x1b[D')
+                            
                     elif char == b'\r':  # enter
                         channel.send(b'\r\n')
                         break
+                        
                     elif char == b'\x03':  # ctrl-c
                         channel.send(b'^C\r\n')
                         command = ""
+                        cursor_pos = 0
                         break
+                        
                     elif char == b'\x04':  # ctrl-d
                         if not command:
                             channel.send(b'logout\r\n')
                             return
+                            
+                    elif char == b'\x17':  # ctrl-w (delete word)
+                        if cursor_pos > 0:
+                            # Find the start of the current/previous word
+                            new_pos = cursor_pos - 1
+                            while new_pos > 0 and command[new_pos-1].isspace():
+                                new_pos -= 1
+                            while new_pos > 0 and not command[new_pos-1].isspace():
+                                new_pos -= 1
+                                
+                            # Delete from new_pos to cursor_pos
+                            command = command[:new_pos] + command[cursor_pos:]
+                            
+                            # Move cursor back and redraw
+                            move_back = cursor_pos - new_pos
+                            channel.send(b'\x1b[D' * move_back)
+                            remainder = command[new_pos:]
+                            channel.send(remainder.encode() + b' ' * move_back + b'\x1b[D' * len(remainder))
+                            cursor_pos = new_pos
+                            
+                    elif char == b'\x15':  # ctrl-u (clear line before cursor)
+                        if cursor_pos > 0:
+                            # Clear from start to cursor
+                            command = command[cursor_pos:]
+                            # Move cursor to start
+                            channel.send(b'\r' + b'$ ')
+                            # Redraw remaining text
+                            channel.send(command.encode() + b' ' * cursor_pos)
+                            # Move cursor to start
+                            channel.send(b'\r' + b'$ ')
+                            cursor_pos = 0
+                            
                     else:
-                        # Normal character
+                        # Insert normal character at cursor position
                         try:
                             char_decoded = char.decode('utf-8')
-                            command += char_decoded
-                            channel.send(char)  # Echo back
+                            if char_decoded.isprintable():
+                                # Insert character at cursor position
+                                command = command[:cursor_pos] + char_decoded + command[cursor_pos:]
+                                cursor_pos += 1
+                                
+                                # Echo the inserted character
+                                channel.send(char)
+                                
+                                # If cursor is not at end, redraw the rest of the line
+                                if cursor_pos < len(command):
+                                    remainder = command[cursor_pos:]
+                                    channel.send(remainder.encode())
+                                    # Move cursor back to insertion point
+                                    channel.send(b'\x1b[D' * len(remainder))
                         except UnicodeDecodeError:
                             continue
                 
@@ -315,21 +557,170 @@ class EnhancedIoTHoneypot:
                     channel.send('Goodbye!\r\n')
                     break
                 
+                # Add command to history if it's not empty and different from last command
+                if command and (not history or command != history[-1]):
+                    history.append(command)
+                    # Limit history size to prevent memory issues
+                    if len(history) > 100:
+                        history.pop(0)
+                
                 # Process command and format response
                 response = self._process_command(command, client_address)
                 # Split response into lines and send each with proper line ending
                 for line in response.splitlines():
-                    channel.send(line.rstrip() + '\r\n')  # Ensure consistent line endings
-        
+                    channel.send(line.rstrip() + '\r\n')
+                    
         except Exception as e:
             logger.error(f"Error handling SSH client: {str(e)}")
         finally:
+            # Clean up command history when client disconnects
+            if client_id in self.client_command_history:
+                del self.client_command_history[client_id]
+            if client_id in self.client_history_index:
+                del self.client_history_index[client_id]
+            
             if 'channel' in locals() and channel is not None:
                 channel.close()
             if 'transport' in locals() and transport is not None:
                 transport.close()
             if client_socket in self.connections:
                 self.connections.remove(client_socket)
+
+    def _process_device_command(self, cmd, args, device_type):
+        """Process device-specific commands"""
+        if device_type == "camera":
+            return self._handle_camera_command(cmd, args)
+        elif device_type == "thermostat":
+            return self._handle_thermostat_command(cmd, args)
+        return "Device type not supported"
+
+    def _handle_camera_command(self, cmd, args):
+        """Handle camera-specific commands"""
+        state = self.device_states["camera"]
+        
+        if cmd == "view":
+            return f"Streaming video feed from {state['stream_url']}\nResolution: {state['resolution']}"
+        elif cmd == "record":
+            state["recording"] = not state["recording"]
+            return f"Recording {'started' if state['recording'] else 'stopped'}"
+        elif cmd == "snapshot":
+            state["snapshots_taken"] += 1
+            return f"Snapshot taken (#{state['snapshots_taken']})"
+        elif cmd == "rotate":
+            if not args:
+                return "Usage: rotate <angle>"
+            try:
+                angle = int(args[0]) % 360
+                state["rotation"] = angle
+                return f"Camera rotated to {angle} degrees"
+            except ValueError:
+                return "Invalid angle. Please enter a number between 0 and 360"
+        elif cmd == "night_vision":
+            state["night_vision"] = not state["night_vision"]
+            return f"Night vision {'enabled' if state['night_vision'] else 'disabled'}"
+        elif cmd == "motion_detection":
+            state["motion_detection"] = not state["motion_detection"]
+            return f"Motion detection {'enabled' if state['motion_detection'] else 'disabled'}"
+        elif cmd == "resolution":
+            if not args:
+                return "Usage: resolution <720p|1080p|4K>"
+            if args[0] in ["720p", "1080p", "4K"]:
+                state["resolution"] = args[0]
+                return f"Resolution set to {args[0]}"
+            return "Invalid resolution. Supported values: 720p, 1080p, 4K"
+        elif cmd == "status":
+            status = [
+                f"Camera Status:",
+                f"  Status: {state['status']}",
+                f"  Recording: {'Yes' if state['recording'] else 'No'}",
+                f"  Resolution: {state['resolution']}",
+                f"  Motion Detection: {'Enabled' if state['motion_detection'] else 'Disabled'}",
+                f"  Rotation: {state['rotation']}°",
+                f"  Night Vision: {'Enabled' if state['night_vision'] else 'Disabled'}",
+                f"  Stream URL: {state['stream_url']}",
+                f"  Snapshots Taken: {state['snapshots_taken']}"
+            ]
+            return "\n".join(status)
+        return f"Unknown camera command: {cmd}"
+
+    def _handle_thermostat_command(self, cmd, args):
+        """Handle thermostat-specific commands"""
+        state = self.device_states["thermostat"]
+        
+        if cmd == "temperature":
+            return f"Current temperature: {state['current_temp']}°F\nTarget temperature: {state['target_temp']}°F"
+        elif cmd == "set":
+            if not args:
+                return "Usage: set <temperature>"
+            try:
+                temp = int(args[0])
+                if 60 <= temp <= 85:
+                    state["target_temp"] = temp
+                    return f"Target temperature set to {temp}°F"
+                return "Temperature must be between 60°F and 85°F"
+            except ValueError:
+                return "Invalid temperature. Please enter a number"
+        elif cmd == "mode":
+            if not args:
+                return "Usage: mode <auto|heat|cool|off>"
+            mode = args[0].lower()
+            if mode in ["auto", "heat", "cool", "off"]:
+                state["mode"] = mode
+                return f"Mode set to {mode}"
+            return "Invalid mode. Supported modes: auto, heat, cool, off"
+        elif cmd == "schedule":
+            if not args:
+                schedule = [
+                    "Current Schedule:",
+                    *[f"  {period}: {details['time']} - {details['temp']}°F"
+                      for period, details in state['schedule'].items()]
+                ]
+                return "\n".join(schedule)
+            if len(args) >= 3:
+                period = args[0].lower()
+                if period in state["schedule"]:
+                    try:
+                        time = args[1]
+                        temp = int(args[2])
+                        if 60 <= temp <= 85:
+                            state["schedule"][period] = {"time": time, "temp": temp}
+                            return f"Updated {period} schedule: {time} - {temp}°F"
+                        return "Temperature must be between 60°F and 85°F"
+                    except ValueError:
+                        return "Invalid temperature. Please enter a number"
+                return "Invalid period. Use: morning, day, evening, or night"
+            return "Usage: schedule [period] [time] [temperature]"
+        elif cmd == "humidity":
+            return f"Current humidity: {state['humidity']}%"
+        elif cmd == "fan":
+            if not args:
+                return f"Current fan setting: {state['fan']}"
+            setting = args[0].lower()
+            if setting in ["auto", "on", "circulate"]:
+                state["fan"] = setting
+                return f"Fan set to {setting}"
+            return "Invalid fan setting. Use: auto, on, or circulate"
+        elif cmd == "eco":
+            if state["energy_mode"] == "normal":
+                state["energy_mode"] = "eco"
+                state["target_temp"] = 78 if state["mode"] == "cool" else 68
+                return "Eco mode enabled. Temperature adjusted for energy savings"
+            else:
+                state["energy_mode"] = "normal"
+                return "Eco mode disabled. Returning to normal settings"
+        elif cmd == "status":
+            status = [
+                f"Thermostat Status:",
+                f"  Status: {state['status']}",
+                f"  Current Temperature: {state['current_temp']}°F",
+                f"  Target Temperature: {state['target_temp']}°F",
+                f"  Mode: {state['mode'].capitalize()}",
+                f"  Humidity: {state['humidity']}%",
+                f"  Fan: {state['fan'].capitalize()}",
+                f"  Energy Mode: {state['energy_mode'].capitalize()}"
+            ]
+            return "\n".join(status)
+        return f"Unknown thermostat command: {cmd}"
 
     def _process_command(self, command, client_address):
         """Process command and return response"""
@@ -351,88 +742,98 @@ class EnhancedIoTHoneypot:
                 logger.warning(f"Attack detected from {ip}:{port} - {attack_type}")
                 return self._get_fake_response_for_attack(attack_type)
         
-        # Process legitimate commands
+        # Handle basic commands first
         if cmd == 'help':
             return self._get_enhanced_sandbox_help()
-        elif cmd == 'status':
-            status = []
-            status.append(f"Device: {self.current_device.capitalize()}")
-            status.append(f"Status: Online")
-            status.append(f"Uptime: {random.randint(1, 24)} hours")
-            
-            if self.current_device == "camera":
-                status.append(f"Mode: {random.choice(['Recording', 'Standby', 'Motion Detection'])}")
-                status.append(f"Resolution: {random.choice(['720p', '1080p', '4K'])}")
-            elif self.current_device == "thermostat":
-                status.append(f"Temperature: {random.randint(65, 85)}°F")
-                status.append(f"Mode: {random.choice(['Heat', 'Cool', 'Auto', 'Off'])}")
-            elif self.current_device == "smartlock":
-                status.append(f"Lock status: {random.choice(['Locked', 'Unlocked'])}")
-                status.append(f"Battery: {random.randint(50, 100)}%")
-            elif self.current_device == "smart_bulb":
-                status.append(f"State: {random.choice(['On', 'Off'])}")
-                status.append(f"Brightness: {random.randint(0, 100)}%")
-                status.append(f"Color: {random.choice(['Warm White', 'Cool White', 'RGB'])}")
-            
-            return "\n".join(status)
         elif cmd == 'devices':
-            devices = ["Available devices in network:"]
-            for i, device in enumerate(self.real_iot_devices, 1):
-                devices.append(f"{i}. {device['type'].capitalize()} at {device['ip']}:{device['port']}")
-            return "\n".join(devices)
+            return self._list_devices()
         elif cmd == 'connect':
             if not args:
-                return "Usage: connect <device_number>"
+                return "Usage: connect <device_id>"
             try:
-                idx = int(args[0]) - 1
-                if 0 <= idx < len(self.real_iot_devices):
-                    device = self.real_iot_devices[idx]
-                    return f"Connected to {device['type'].capitalize()} at {device['ip']}"
-                else:
-                    return "Invalid device number"
+                device_id = int(args[0])
+                return self._connect_to_device(device_id)
             except ValueError:
-                return "Invalid device number. Please enter a number."
+                return "Invalid device ID. Please enter a number."
         elif cmd == 'scan':
-            scan_results = ["Scanning network..."]
-            for i in range(5):
-                device_ip = f"192.168.1.{random.randint(10, 99)}"
-                device_type = random.choice(self.device_types)
-                scan_results.append(f"{device_ip:<15} - {device_type.capitalize():<12} [{random.choice(['OPEN', 'FILTERED'])}]")
+            scan_results = [
+                "Scanning network for devices...",
+                "\nActive devices found:",
+                "----------------------------------------"
+            ]
+            
+            # Add some realistic device entries
+            devices = [
+                ("192.168.1.101", "Camera", "Online", "Hikvision DS-2CD2385G1"),
+                ("192.168.1.102", "Thermostat", "Online", "Nest Learning v3"),
+                ("192.168.1.103", "Smart Lock", "Online", "August Wi-Fi"),
+                ("192.168.1.104", "Camera", "Offline", "Arlo Pro 4"),
+                ("192.168.1.105", "Thermostat", "Online", "Ecobee SmartThermostat")
+            ]
+            
+            for ip, type_, status, model in devices:
+                scan_results.append(f"IP: {ip:<15} | Type: {type_:<10} | Status: {status:<8} | Model: {model}")
+            
+            scan_results.extend([
+                "----------------------------------------",
+                f"\nTotal devices found: {len(devices)}",
+                "Scan complete."
+            ])
+            
             return "\n".join(scan_results)
-        else:
-            # Check device-specific commands
-            device_commands = self.device_commands.get(self.current_device, [])
-            if cmd in device_commands:
-                response = [f"Executing {cmd} command..."]
-                if cmd == "view" and self.current_device == "camera":
-                    response.append("Streaming video feed...")
-                elif cmd == "temperature" and self.current_device == "thermostat":
-                    response.append(f"Current temperature: {random.randint(65, 85)}°F")
-                elif cmd in ["lock", "unlock"] and self.current_device == "smartlock":
-                    response.append(f"Door {cmd}ed successfully.")
-                elif cmd in ["on", "off"] and self.current_device == "smart_bulb":
-                    response.append(f"Light turned {cmd}.")
-                else:
-                    response.append(f"{cmd.capitalize()} operation completed successfully.")
-                return "\n".join(response)
+        elif cmd == 'status':
+            if self.current_device in ["camera", "thermostat"]:
+                return self._process_device_command("status", args, self.current_device)
+            return "Device type not supported for detailed status"
+        
+        # Handle device-specific commands
+        if self.current_device in ["camera", "thermostat"]:
+            if cmd in self.device_commands[self.current_device]:
+                return self._process_device_command(cmd, args, self.current_device)
+        
+        return f"Unknown command: {command}\nType 'help' for available commands."
+
+    def _list_devices(self):
+        """List available IoT devices with their details"""
+        device_list = [
+            "Available IoT Devices:",
+            "----------------------------------------"
+        ]
+        
+        for device in self.available_devices:
+            status_icon = "🟢" if device["status"] == "online" else "🔴"
+            device_list.append(
+                f"[{device['id']}] {status_icon} {device['type'].capitalize()} - {device['model']}\n"
+                f"    IP: {device['ip']} | Status: {device['status'].capitalize()}\n"
+                f"    Firmware: {device['firmware']} | Last seen: {device['last_seen']}"
+            )
+        
+        device_list.extend([
+            "----------------------------------------",
+            f"Total devices: {len(self.available_devices)}",
+            "\nUse 'connect <id>' to connect to a device"
+        ])
+        
+        return "\n".join(device_list)
+
+    def _connect_to_device(self, device_id):
+        """Connect to a specific IoT device"""
+        for device in self.available_devices:
+            if device["id"] == device_id:
+                if device["status"] == "offline":
+                    return f"Error: Device {device_id} ({device['type']} - {device['model']}) is currently offline"
                 
-            return f"Unknown command: {command}\nType 'help' for available commands."
+                self.current_device = device["type"]
+                return (f"Connected to {device['type'].capitalize()} - {device['model']}\n"
+                       f"IP: {device['ip']} | Firmware: {device['firmware']}\n"
+                       f"Type 'help' to see available commands for this device")
+        
+        return f"Error: Device with ID {device_id} not found"
 
     def _get_fake_response_for_attack(self, attack_type):
         """Generate fake responses for attack attempts"""
-        if attack_type == "file_read_attempt":
-            return "cat: /etc/passwd: No such file or directory\n"
-        elif attack_type == "download_attempt":
-            return "wget: command not found\n"
-        elif attack_type == "shell_attempt":
-            return "sh: command not found\n"
-        elif attack_type == "system_info_attempt":
-            return "bash: ps: command not found\n"
-        elif attack_type == "network_scan_attempt":
-            return "PING 8.8.8.8: Network unreachable\n"
-        else:
-            return "Command not recognized\n"
-    
+        return "Error: Command not recognized. Type 'help' for available commands.\n"
+
     def _log_activity(self, client_address, activity_type, details):
         """Log honeypot activity to file"""
         ip, port = client_address
@@ -479,46 +880,8 @@ class EnhancedIoTHoneypot:
     
     def _enhance_sandbox_experience(self, client_socket, cmd, client_address):
         """Provide interesting fake responses in sandbox to keep attackers engaged"""
-        ip, port = client_address
-        cmd_lower = cmd.lower()
-        
-        # Fake internal network scan results
-        if "scan" in cmd_lower or "nmap" in cmd_lower:
-            fake_response = "Scanning...\n\n"
-            fake_response += "Found 5 devices on network:\n"
-            for i in range(5):
-                device_ip = f"192.168.1.{random.randint(10, 99)}"
-                device_type = random.choice(self.device_types)
-                fake_response += f"{device_ip} - {device_type.capitalize()} [{'OPEN' if random.random() > 0.5 else 'FILTERED'}]\n"
-            client_socket.send(fake_response.encode())
-            self._log_activity(client_address, "sandbox_scan", f"Attacker scanning network in sandbox: {cmd}")
-            return True
-        
-        # Fake file access results
-        if "cat" in cmd_lower or "ls" in cmd_lower or "dir" in cmd_lower:
-            if "passwd" in cmd_lower or "shadow" in cmd_lower:
-                fake_response = "No such file or directory\n"
-            else:
-                fake_response = "Files found:\n"
-                fake_response += "firmware_v1.2.bin\n"
-                fake_response += "settings.conf\n"
-                fake_response += "network.cfg\n"
-                fake_response += "users.db\n"
-            client_socket.send(fake_response.encode())
-            self._log_activity(client_address, "sandbox_files", f"Attacker exploring files in sandbox: {cmd}")
-            return True
-        
-        # Fake vulnerable responses
-        if "wget" in cmd_lower or "curl" in cmd_lower:
-            fake_response = "Downloading...\n"
-            fake_response += "Download complete: 234KB\n"
-            client_socket.send(fake_response.encode())
-            self._log_activity(client_address, "sandbox_download", f"Attacker attempting download in sandbox: {cmd}")
-            return True
-        
-        return False  # Command not handled by sandbox enhancer
-    
-    # Add this new method after _enhance_sandbox_experience
+        return False  # Disabled system command sandboxing
+
     def _get_enhanced_sandbox_help(self, is_admin=False):
         """Return enhanced help text for the sandbox environment"""
         help_text = [
@@ -528,16 +891,17 @@ class EnhancedIoTHoneypot:
             "  scan         - Scan for devices on the network",
             "  devices      - List available devices",
             "  connect <n>  - Connect to device number <n>",
-            "  status       - Show current device status"
+            "  status       - Show current device status",
+            "  exit         - Exit the session"
         ]
         
-        # Add device-specific commands
+        # Add device-specific commands if connected to a device
         if self.current_device in self.device_commands:
             help_text.extend([
                 f"\nDevice-specific commands for {self.current_device}:"
             ])
-            for cmd in self.device_commands[self.current_device]:
-                help_text.append(f"  {cmd:<12} - Control {self.current_device} {cmd}")
+            for cmd, desc in self.device_commands[self.current_device].items():
+                help_text.append(f"  {cmd:<12} - {desc}")
         
         if is_admin:
             help_text.extend([
@@ -547,13 +911,5 @@ class EnhancedIoTHoneypot:
                 "  reset        - Factory reset a device",
                 "  firmware     - Update device firmware"
             ])
-        
-        help_text.extend([
-            "\nSystem commands:",
-            "  ping         - Test connectivity to a device",
-            "  cat          - Display file contents",
-            "  ls           - List files in current directory",
-            "  exit         - Exit the session"
-        ])
         
         return "\n".join(help_text)
