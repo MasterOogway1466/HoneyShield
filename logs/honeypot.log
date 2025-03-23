@@ -644,3 +644,40 @@
 {"timestamp": "2025-03-23T01:54:21.696742", "ip": "192.168.5.131", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smartlock", "label": "info"}
 {"timestamp": "2025-03-23T01:54:22.832988", "ip": "192.168.5.131", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smartlock", "label": "info"}
 {"timestamp": "2025-03-23T01:54:25.523026", "ip": "192.168.5.131", "port": 54491, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T02:04:45.122524", "ip": "127.0.0.1", "port": 47225, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:04:48.165188", "ip": "127.0.0.1", "port": 0, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "hub", "label": "threat"}
+{"timestamp": "2025-03-23T02:04:49.258509", "ip": "127.0.0.1", "port": 47235, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:05:01.611586", "ip": "127.0.0.1", "port": 46209, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:05:13.293747", "ip": "127.0.0.1", "port": 46209, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:05:13.294184", "ip": "127.0.0.1", "port": 46209, "type": "sandboxed", "details": "Failed first command check", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-23T02:05:43.099689", "ip": "127.0.0.1", "port": 46209, "type": "command", "details": "Command: sniff", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:05:43.100087", "ip": "127.0.0.1", "port": 46209, "type": "sandbox_escape", "details": "Escape attempt: traffic_sniffing_attempt", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:05:47.929655", "ip": "127.0.0.1", "port": 46209, "type": "command", "details": "Command: hello", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:05:55.542607", "ip": "127.0.0.1", "port": 47341, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:06:14.397660", "ip": "127.0.0.1", "port": 46313, "type": "connection", "details": "New connection to hub", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:06:32.954318", "ip": "127.0.0.1", "port": 46313, "type": "command", "details": "Command: fbi_open_up", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:06:32.276649", "ip": "127.0.0.1", "port": 46313, "type": "command", "details": "Command: help", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:07:22.465045", "ip": "127.0.0.1", "port": 46313, "type": "command", "details": "Command: sniff", "device": "hub", "label": "info"}
+{"timestamp": "2025-03-23T02:07:22.465418", "ip": "127.0.0.1", "port": 46313, "type": "attack_detected", "details": "Attack type: traffic_sniffing_attempt", "device": "hub", "label": "threat"}
+{"timestamp": "2025-03-23T02:21:08.904037", "ip": "192.168.5.201", "port": 41196, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:21:17.965741", "ip": "192.168.5.131", "port": 56458, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:21:27.612516", "ip": "192.168.5.201", "port": 41196, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:21:27.613331", "ip": "192.168.5.201", "port": 41196, "type": "sandboxed", "details": "", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-23T02:21:30.259523", "ip": "192.168.5.201", "port": 41196, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:21:32.574430", "ip": "192.168.5.201", "port": 41196, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:22:35.058572", "ip": "192.168.5.201", "port": 40486, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:22:43.846971", "ip": "192.168.5.201", "port": 40486, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:22:43.847803", "ip": "192.168.5.201", "port": 40486, "type": "sandboxed", "details": "", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-23T02:22:46.292910", "ip": "192.168.5.201", "port": 40486, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:23:02.384810", "ip": "192.168.5.201", "port": 40432, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:23:13.941141", "ip": "192.168.5.201", "port": 40432, "type": "command", "details": "Command: fbi_open_up", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:23:31.804498", "ip": "192.168.5.201", "port": 40432, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:24:45.680729", "ip": "192.168.5.201", "port": 47056, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:24:58.123980", "ip": "192.168.5.201", "port": 47056, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:24:58.124933", "ip": "192.168.5.201", "port": 47056, "type": "sandboxed", "details": "", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-23T02:25:10.263371", "ip": "192.168.5.201", "port": 47056, "type": "command", "details": "Command: sniff ", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:25:10.264118", "ip": "192.168.5.201", "port": 47056, "type": "sandbox_escape", "details": "Escape attempt: traffic_sniffing_attempt", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:25:27.044987", "ip": "192.168.5.201", "port": 41270, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T02:29:57.797042", "ip": "192.168.5.131", "port": 56597, "type": "connection", "details": "New connection to smartlock", "device": "smartlock", "label": "info"}
+{"timestamp": "2025-03-23T02:30:08.704644", "ip": "192.168.5.131", "port": 0, "type": "blacklisted", "details": "IP blacklisted after 3 failed login attempts", "device": "smartlock", "label": "threat"}
+{"timestamp": "2025-03-23T02:30:12.196013", "ip": "192.168.5.131", "port": 56608, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smartlock", "label": "info"}

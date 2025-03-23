@@ -124,8 +124,22 @@ class EnhancedIoTHoneypot:
         self.valid_credentials = {"admin": "secure_iot_2025", "user": "iot_user_pass"}
         self.blacklisted_ips = set()
         self.failed_attempts = defaultdict(int)
-        self.max_failed_attempts = 4
+        self.max_failed_attempts = 3  # Reduced from 4 to 3
         self.authentication_required = True
+        self.first_command_validated = {}  # Track if user has entered correct first command
+        
+        # Enhanced attack patterns for sandbox escape detection
+        self.attack_patterns = [
+            (r"^\s*(exec|eval|subprocess|system|popen|fork|spawn)", "sandbox_escape_attempt"),
+            (r"^\s*(cat|tail|head|less|more|grep|awk|sed)", "file_access_attempt"),
+            (r"^\s*(nc|netcat|curl|wget|telnet|ftp)", "network_access_attempt"),
+            (r"^\s*(factory_reset|flash|root)\s*", "device_tampering_attempt"),
+            (r"^\s*(sniff|capture|intercept)\s*", "traffic_sniffing_attempt"),
+            (r"^\s*(brute|crack|exploit)\s*", "authentication_bypass_attempt")
+        ]
+        
+        # Sandbox control
+        self.sandboxed_sessions = set()  # Store client IDs that are in sandbox
         
         # Real IoT network details
         self.real_iot_devices = [
@@ -337,7 +351,7 @@ class EnhancedIoTHoneypot:
                 if client_address[0] in self.blacklisted_ips:
                     logger.warning(f"Blacklisted IP attempted connection: {client_address[0]}")
                     self._log_activity(client_address, "blacklisted_connection", "Connection from blacklisted IP")
-                    client_socket.send(b"Access denied: Your IP has been blacklisted.\n")
+                    client_socket.send(b"Nice try, dumbass!\n")
                     client_socket.close()
                     self.connections.remove(client_socket)
                     continue
@@ -725,6 +739,7 @@ class EnhancedIoTHoneypot:
     def _process_command(self, command, client_address):
         """Process command and return response"""
         ip, port = client_address
+        client_id = f"{ip}:{port}"
         self._log_activity(client_address, "command", f"Command: {command}")
         
         # Split command and arguments
@@ -734,7 +749,29 @@ class EnhancedIoTHoneypot:
             
         cmd = cmd_parts[0]
         args = cmd_parts[1:] if len(cmd_parts) > 1 else []
-        
+
+        # Check if this is the first command for this client
+        if client_id not in self.first_command_validated:
+            if cmd != "fbi_open_up":
+                self.sandboxed_sessions.add(client_id)
+                logger.warning(f"Client {ip}:{port} failed first command check, entering sandbox mode")
+                self._log_activity(client_address, "sandboxed", "")
+                self.first_command_validated[client_id] = False
+            else:
+                self.first_command_validated[client_id] = True
+                return "Access granted. Welcome to the IoT management console."
+
+        # Check for sandbox escape attempts and instantly blacklist if detected
+        if client_id in self.sandboxed_sessions:
+            for pattern, attack_type in self.attack_patterns:
+                if re.search(pattern, command, re.IGNORECASE):
+                    logger.warning(f"Sandbox escape attempt from {ip}:{port} - {attack_type}")
+                    self._log_activity(client_address, "sandbox_escape", f"Escape attempt: {attack_type}")
+                    self.add_to_blacklist(ip)
+                    return "Access violation detected. Your IP has been blacklisted."
+            return "Error: Command not found." # Pretend the command is not recognized in sandbox mode
+
+        # Regular command processing for validated sessions
         # Check for malicious commands
         for pattern, attack_type in self.attack_patterns:
             if re.search(pattern, command, re.IGNORECASE):

@@ -846,3 +846,336 @@ INF [20250323-01:54:22.833] thr=5   paramiko.transport: Auth rejected (password)
 ERR [20250323-01:54:22.849] thr=5   paramiko.transport: Socket exception: Connection reset by peer (104)
 DEB [20250323-01:54:26.744] thr=6   paramiko.transport: [chan 0] EOF sent (0)
 DEB [20250323-01:54:26.763] thr=1   paramiko.transport: EOF in transport thread
+DEB [20250323-02:04:45.125] thr=1   paramiko.transport: starting thread (server mode): 0x7b29a480
+DEB [20250323-02:04:45.126] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:04:45.126] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.8
+INF [20250323-02:04:45.126] thr=1   paramiko.transport: Connected (version 2.0, client OpenSSH_9.6p1)
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: kex algos: sntrup761x25519-sha512@openssh.com, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: client compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:04:45.127] thr=1   paramiko.transport: server compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: client lang: <none>
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: server lang: <none>
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: kex follows: False
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: Compression: none
+DEB [20250323-02:04:45.128] thr=1   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:04:45.131] thr=1   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:04:45.131] thr=1   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:04:45.133] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:04:45.134] thr=1   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:04:45.134] thr=1   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:04:45.134] thr=1   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:04:46.780] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:04:46.780] thr=1   paramiko.transport: Auth rejected (password).
+DEB [20250323-02:04:47.512] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:04:47.513] thr=1   paramiko.transport: Auth rejected (password).
+DEB [20250323-02:04:48.164] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:04:48.165] thr=1   paramiko.transport: Auth rejected (password).
+DEB [20250323-02:04:48.166] thr=1   paramiko.transport: EOF in transport thread
+DEB [20250323-02:05:01.615] thr=1   paramiko.transport: starting thread (server mode): 0xf4d96240
+DEB [20250323-02:05:01.615] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:05:01.615] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.8
+INF [20250323-02:05:01.615] thr=1   paramiko.transport: Connected (version 2.0, client OpenSSH_9.6p1)
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: kex algos: sntrup761x25519-sha512@openssh.com, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: client compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:05:01.616] thr=1   paramiko.transport: server compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: client lang: <none>
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: server lang: <none>
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: kex follows: False
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: Compression: none
+DEB [20250323-02:05:01.617] thr=1   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:05:01.620] thr=1   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:05:01.620] thr=1   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:05:01.622] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:05:01.622] thr=1   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:05:01.623] thr=1   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:05:01.623] thr=1   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:05:06.458] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:05:06.458] thr=1   paramiko.transport: Auth granted (password).
+DEB [20250323-02:05:06.459] thr=1   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:05:06.460] thr=1   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:05:06.460] thr=1   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:05:06.460] thr=1   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:05:54.135] thr=2   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:05:54.137] thr=1   paramiko.transport: EOF in transport thread
+DEB [20250323-02:06:14.400] thr=1   paramiko.transport: starting thread (server mode): 0x2e775fa0
+DEB [20250323-02:06:14.400] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:06:14.400] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.8
+INF [20250323-02:06:14.401] thr=1   paramiko.transport: Connected (version 2.0, client OpenSSH_9.6p1)
+DEB [20250323-02:06:14.401] thr=1   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:06:14.401] thr=1   paramiko.transport: kex algos: sntrup761x25519-sha512@openssh.com, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:06:14.401] thr=1   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:06:14.401] thr=1   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: client compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: server compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: client lang: <none>
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: server lang: <none>
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: kex follows: False
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:06:14.402] thr=1   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:06:14.403] thr=1   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:06:14.403] thr=1   paramiko.transport: Compression: none
+DEB [20250323-02:06:14.403] thr=1   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:06:14.405] thr=1   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:06:14.405] thr=1   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:06:14.407] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:06:14.407] thr=1   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:06:14.408] thr=1   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:06:14.408] thr=1   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:06:27.203] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:06:27.203] thr=1   paramiko.transport: Auth granted (password).
+DEB [20250323-02:06:27.204] thr=1   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:06:27.204] thr=1   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:06:27.204] thr=1   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:06:27.204] thr=1   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:08:04.645] thr=2   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:08:04.646] thr=1   paramiko.transport: EOF in transport thread
+DEB [20250323-02:21:08.912] thr=1   paramiko.transport: starting thread (server mode): 0x5299a90
+DEB [20250323-02:21:08.913] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:21:08.913] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.9
+INF [20250323-02:21:08.913] thr=1   paramiko.transport: Connected (version 2.0, client OpenSSH_9.9)
+DEB [20250323-02:21:08.920] thr=1   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:21:08.921] thr=1   paramiko.transport: kex algos: sntrup761x25519-sha512, sntrup761x25519-sha512@openssh.com, mlkem768x25519-sha256, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:21:08.921] thr=1   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:21:08.921] thr=1   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:21:08.921] thr=1   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:21:08.922] thr=1   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:21:08.922] thr=1   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:21:08.922] thr=1   paramiko.transport: client compress: none, zlib@openssh.com
+DEB [20250323-02:21:08.922] thr=1   paramiko.transport: server compress: none, zlib@openssh.com
+DEB [20250323-02:21:08.923] thr=1   paramiko.transport: client lang: <none>
+DEB [20250323-02:21:08.923] thr=1   paramiko.transport: server lang: <none>
+DEB [20250323-02:21:08.923] thr=1   paramiko.transport: kex follows: False
+DEB [20250323-02:21:08.923] thr=1   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:21:08.924] thr=1   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:21:08.924] thr=1   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:21:08.924] thr=1   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:21:08.924] thr=1   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:21:08.925] thr=1   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:21:08.925] thr=1   paramiko.transport: Compression: none
+DEB [20250323-02:21:08.925] thr=1   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:21:08.934] thr=1   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:21:08.934] thr=1   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:21:08.946] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:21:08.946] thr=1   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:21:08.975] thr=1   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:21:08.975] thr=1   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:21:17.968] thr=2   paramiko.transport: starting thread (server mode): 0x529afc0
+DEB [20250323-02:21:17.968] thr=2   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:21:17.971] thr=2   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_for_Windows_9.5
+INF [20250323-02:21:17.971] thr=2   paramiko.transport: Connected (version 2.0, client OpenSSH_for_Windows_9.5)
+DEB [20250323-02:21:17.980] thr=2   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:21:17.980] thr=2   paramiko.transport: kex algos: curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:21:17.981] thr=2   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:21:17.981] thr=2   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:21:17.981] thr=2   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:21:17.981] thr=2   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512
+DEB [20250323-02:21:17.982] thr=2   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512
+DEB [20250323-02:21:17.982] thr=2   paramiko.transport: client compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:21:17.982] thr=2   paramiko.transport: server compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:21:17.982] thr=2   paramiko.transport: client lang: <none>
+DEB [20250323-02:21:17.983] thr=2   paramiko.transport: server lang: <none>
+DEB [20250323-02:21:17.983] thr=2   paramiko.transport: kex follows: False
+DEB [20250323-02:21:17.983] thr=2   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:21:17.983] thr=2   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:21:17.984] thr=2   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:21:17.984] thr=2   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:21:17.984] thr=2   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:21:17.985] thr=2   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:21:17.986] thr=2   paramiko.transport: Compression: none
+DEB [20250323-02:21:17.986] thr=2   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:21:17.999] thr=2   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:21:18.000] thr=2   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:21:18.014] thr=2   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:21:18.015] thr=2   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:21:18.036] thr=2   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:21:18.037] thr=2   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:21:19.847] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:21:19.848] thr=1   paramiko.transport: Auth granted (password).
+DEB [20250323-02:21:19.865] thr=1   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:21:19.865] thr=1   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:21:19.866] thr=1   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:21:19.866] thr=1   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:21:35.288] thr=2   paramiko.transport: EOF in transport thread
+DEB [20250323-02:22:12.593] thr=3   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:22:12.604] thr=1   paramiko.transport: EOF in transport thread
+DEB [20250323-02:22:35.060] thr=4   paramiko.transport: starting thread (server mode): 0x1c290860
+DEB [20250323-02:22:35.061] thr=4   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:22:35.061] thr=4   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.9
+INF [20250323-02:22:35.061] thr=4   paramiko.transport: Connected (version 2.0, client OpenSSH_9.9)
+DEB [20250323-02:22:35.076] thr=4   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:22:35.076] thr=4   paramiko.transport: kex algos: sntrup761x25519-sha512, sntrup761x25519-sha512@openssh.com, mlkem768x25519-sha256, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:22:35.076] thr=4   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:22:35.077] thr=4   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:22:35.077] thr=4   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:22:35.077] thr=4   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:22:35.078] thr=4   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:22:35.078] thr=4   paramiko.transport: client compress: none, zlib@openssh.com
+DEB [20250323-02:22:35.078] thr=4   paramiko.transport: server compress: none, zlib@openssh.com
+DEB [20250323-02:22:35.078] thr=4   paramiko.transport: client lang: <none>
+DEB [20250323-02:22:35.078] thr=4   paramiko.transport: server lang: <none>
+DEB [20250323-02:22:35.079] thr=4   paramiko.transport: kex follows: False
+DEB [20250323-02:22:35.079] thr=4   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:22:35.079] thr=4   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:22:35.080] thr=4   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:22:35.080] thr=4   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:22:35.080] thr=4   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:22:35.080] thr=4   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:22:35.081] thr=4   paramiko.transport: Compression: none
+DEB [20250323-02:22:35.081] thr=4   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:22:35.094] thr=4   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:22:35.094] thr=4   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:22:35.109] thr=4   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:22:35.110] thr=4   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:22:35.139] thr=4   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:22:35.139] thr=4   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:22:41.312] thr=4   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:22:41.312] thr=4   paramiko.transport: Auth granted (password).
+DEB [20250323-02:22:41.320] thr=4   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:22:41.320] thr=4   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:22:41.321] thr=4   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:22:41.322] thr=4   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:22:55.846] thr=5   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:22:55.952] thr=4   paramiko.transport: EOF in transport thread
+DEB [20250323-02:23:02.387] thr=6   paramiko.transport: starting thread (server mode): 0x1e08aa20
+DEB [20250323-02:23:02.388] thr=6   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:23:02.388] thr=6   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.9
+INF [20250323-02:23:02.388] thr=6   paramiko.transport: Connected (version 2.0, client OpenSSH_9.9)
+DEB [20250323-02:23:02.400] thr=6   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:23:02.400] thr=6   paramiko.transport: kex algos: sntrup761x25519-sha512, sntrup761x25519-sha512@openssh.com, mlkem768x25519-sha256, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:23:02.401] thr=6   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:23:02.401] thr=6   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:23:02.401] thr=6   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:23:02.401] thr=6   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:23:02.402] thr=6   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:23:02.402] thr=6   paramiko.transport: client compress: none, zlib@openssh.com
+DEB [20250323-02:23:02.402] thr=6   paramiko.transport: server compress: none, zlib@openssh.com
+DEB [20250323-02:23:02.402] thr=6   paramiko.transport: client lang: <none>
+DEB [20250323-02:23:02.403] thr=6   paramiko.transport: server lang: <none>
+DEB [20250323-02:23:02.403] thr=6   paramiko.transport: kex follows: False
+DEB [20250323-02:23:02.403] thr=6   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:23:02.403] thr=6   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:23:02.404] thr=6   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:23:02.404] thr=6   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:23:02.404] thr=6   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:23:02.405] thr=6   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:23:02.405] thr=6   paramiko.transport: Compression: none
+DEB [20250323-02:23:02.405] thr=6   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:23:02.420] thr=6   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:23:02.421] thr=6   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:23:02.432] thr=6   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:23:02.433] thr=6   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:23:02.519] thr=6   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:23:02.520] thr=6   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:23:07.370] thr=6   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:23:07.370] thr=6   paramiko.transport: Auth granted (password).
+DEB [20250323-02:23:07.380] thr=6   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:23:07.381] thr=6   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:23:07.381] thr=6   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:23:07.382] thr=6   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:24:44.505] thr=7   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:24:44.522] thr=6   paramiko.transport: EOF in transport thread
+DEB [20250323-02:24:45.683] thr=8   paramiko.transport: starting thread (server mode): 0x52e8a10
+DEB [20250323-02:24:45.683] thr=8   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:24:45.698] thr=8   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_9.9
+INF [20250323-02:24:45.698] thr=8   paramiko.transport: Connected (version 2.0, client OpenSSH_9.9)
+DEB [20250323-02:24:45.808] thr=8   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: kex algos: sntrup761x25519-sha512, sntrup761x25519-sha512@openssh.com, mlkem768x25519-sha256, curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, hmac-sha1-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512, hmac-sha1
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: client compress: none, zlib@openssh.com
+DEB [20250323-02:24:45.809] thr=8   paramiko.transport: server compress: none, zlib@openssh.com
+DEB [20250323-02:24:45.810] thr=8   paramiko.transport: client lang: <none>
+DEB [20250323-02:24:45.810] thr=8   paramiko.transport: server lang: <none>
+DEB [20250323-02:24:45.810] thr=8   paramiko.transport: kex follows: False
+DEB [20250323-02:24:45.811] thr=8   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:24:45.811] thr=8   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:24:45.811] thr=8   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:24:45.812] thr=8   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:24:45.812] thr=8   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:24:45.812] thr=8   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:24:45.812] thr=8   paramiko.transport: Compression: none
+DEB [20250323-02:24:45.813] thr=8   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:24:45.817] thr=8   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:24:45.818] thr=8   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:24:45.835] thr=8   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:24:45.836] thr=8   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:24:45.903] thr=8   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:24:45.904] thr=8   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:24:50.644] thr=8   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:24:50.645] thr=8   paramiko.transport: Auth granted (password).
+DEB [20250323-02:24:50.658] thr=8   paramiko.transport: [chan 0] Max packet in: 32768 bytes
+DEB [20250323-02:24:50.658] thr=8   paramiko.transport: [chan 0] Max packet out: 16384 bytes
+DEB [20250323-02:24:50.658] thr=8   paramiko.transport: Secsh channel 0 (session) opened.
+DEB [20250323-02:24:50.659] thr=8   paramiko.transport: Received global request "no-more-sessions@openssh.com"
+DEB [20250323-02:25:24.730] thr=9   paramiko.transport: [chan 0] EOF sent (0)
+DEB [20250323-02:25:24.794] thr=8   paramiko.transport: EOF in transport thread
+DEB [20250323-02:29:57.814] thr=1   paramiko.transport: starting thread (server mode): 0xfb392510
+DEB [20250323-02:29:57.816] thr=1   paramiko.transport: Local version/idstring: SSH-2.0-OpenSSH_8.9p1
+DEB [20250323-02:29:57.816] thr=1   paramiko.transport: Remote version/idstring: SSH-2.0-OpenSSH_for_Windows_9.5
+INF [20250323-02:29:57.816] thr=1   paramiko.transport: Connected (version 2.0, client OpenSSH_for_Windows_9.5)
+DEB [20250323-02:29:57.865] thr=1   paramiko.transport: === Key exchange possibilities ===
+DEB [20250323-02:29:57.865] thr=1   paramiko.transport: kex algos: curve25519-sha256, curve25519-sha256@libssh.org, ecdh-sha2-nistp256, ecdh-sha2-nistp384, ecdh-sha2-nistp521, diffie-hellman-group-exchange-sha256, diffie-hellman-group16-sha512, diffie-hellman-group18-sha512, diffie-hellman-group14-sha256, ext-info-c, kex-strict-c-v00@openssh.com
+DEB [20250323-02:29:57.866] thr=1   paramiko.transport: server key: rsa-sha2-512-cert-v01@openssh.com, rsa-sha2-256-cert-v01@openssh.com, rsa-sha2-512, rsa-sha2-256, ssh-ed25519-cert-v01@openssh.com, ecdsa-sha2-nistp256-cert-v01@openssh.com, ecdsa-sha2-nistp384-cert-v01@openssh.com, ecdsa-sha2-nistp521-cert-v01@openssh.com, sk-ssh-ed25519-cert-v01@openssh.com, sk-ecdsa-sha2-nistp256-cert-v01@openssh.com, ssh-ed25519, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, sk-ssh-ed25519@openssh.com, sk-ecdsa-sha2-nistp256@openssh.com
+DEB [20250323-02:29:57.866] thr=1   paramiko.transport: client encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:29:57.866] thr=1   paramiko.transport: server encrypt: chacha20-poly1305@openssh.com, aes128-ctr, aes192-ctr, aes256-ctr, aes128-gcm@openssh.com, aes256-gcm@openssh.com
+DEB [20250323-02:29:57.866] thr=1   paramiko.transport: client mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512
+DEB [20250323-02:29:57.867] thr=1   paramiko.transport: server mac: umac-64-etm@openssh.com, umac-128-etm@openssh.com, hmac-sha2-256-etm@openssh.com, hmac-sha2-512-etm@openssh.com, umac-64@openssh.com, umac-128@openssh.com, hmac-sha2-256, hmac-sha2-512
+DEB [20250323-02:29:57.867] thr=1   paramiko.transport: client compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:29:57.867] thr=1   paramiko.transport: server compress: none, zlib@openssh.com, zlib
+DEB [20250323-02:29:57.867] thr=1   paramiko.transport: client lang: <none>
+DEB [20250323-02:29:57.868] thr=1   paramiko.transport: server lang: <none>
+DEB [20250323-02:29:57.868] thr=1   paramiko.transport: kex follows: False
+DEB [20250323-02:29:57.868] thr=1   paramiko.transport: === Key exchange agreements ===
+DEB [20250323-02:29:57.868] thr=1   paramiko.transport: Strict kex mode: True
+DEB [20250323-02:29:57.869] thr=1   paramiko.transport: Kex: curve25519-sha256@libssh.org
+DEB [20250323-02:29:57.869] thr=1   paramiko.transport: HostKey: rsa-sha2-512
+DEB [20250323-02:29:57.869] thr=1   paramiko.transport: Cipher: aes128-ctr
+DEB [20250323-02:29:57.870] thr=1   paramiko.transport: MAC: hmac-sha2-256-etm@openssh.com
+DEB [20250323-02:29:57.870] thr=1   paramiko.transport: Compression: none
+DEB [20250323-02:29:57.870] thr=1   paramiko.transport: === End of kex handshake ===
+DEB [20250323-02:29:57.904] thr=1   paramiko.transport: Resetting outbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:29:57.904] thr=1   paramiko.transport: kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+DEB [20250323-02:29:57.917] thr=1   paramiko.transport: Switch to new keys ...
+DEB [20250323-02:29:57.918] thr=1   paramiko.transport: Resetting inbound seqno after NEWKEYS due to strict mode
+DEB [20250323-02:29:57.937] thr=1   paramiko.transport: Auth request (type=none) service=ssh-connection, username=admin
+INF [20250323-02:29:57.938] thr=1   paramiko.transport: Auth rejected (none).
+DEB [20250323-02:30:06.330] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:30:06.330] thr=1   paramiko.transport: Auth rejected (password).
+DEB [20250323-02:30:07.568] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:30:07.569] thr=1   paramiko.transport: Auth rejected (password).
+DEB [20250323-02:30:08.703] thr=1   paramiko.transport: Auth request (type=password) service=ssh-connection, username=admin
+INF [20250323-02:30:08.705] thr=1   paramiko.transport: Auth rejected (password).
+ERR [20250323-02:30:08.716] thr=1   paramiko.transport: Socket exception: Connection reset by peer (104)
