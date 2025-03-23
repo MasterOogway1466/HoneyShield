@@ -24,24 +24,53 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger(__name__)
 
 class SSHServer(paramiko.ServerInterface):
-    def __init__(self, honeypot):
+    def __init__(self, honeypot, client_ip):
         self.honeypot = honeypot
+        self.client_ip = client_ip
         self.event = threading.Event()
         self.channel = None
         self.shell_requested = threading.Event()
         self.pty_requested = threading.Event()
 
     def check_auth_password(self, username, password):
+        # Check if IP is already blacklisted
+        if self.client_ip in self.honeypot.blacklisted_ips:
+            logger.warning(f"Blocked login attempt from blacklisted IP: {self.client_ip}")
+            self.honeypot._log_activity((self.client_ip, 0), "blocked_login", f"Blocked login attempt from blacklisted IP")
+            return paramiko.AUTH_FAILED
+
+        # Check credentials
+        auth_successful = False
         if username in self.honeypot.valid_credentials:
             if self.honeypot.valid_credentials[username] == password:
+                # Reset failed attempts on successful login
+                if self.client_ip in self.honeypot.failed_attempts:
+                    del self.honeypot.failed_attempts[self.client_ip]
                 return paramiko.AUTH_SUCCESSFUL
+            
+        # Track failed login attempt
+        self.honeypot.failed_attempts[self.client_ip] += 1
+        attempts = self.honeypot.failed_attempts[self.client_ip]
+        
+        # Convert attempt number to ordinal string
+        ordinal = lambda n: f"{n}{'th' if 10<=n%100<=20 else {1:'st',2:'nd',3:'rd'}.get(n%10, 'th')}"
+        attempt_str = ordinal(attempts)
+        
+        logger.warning(f"Failed login attempt ({attempt_str} attempt) from IP: {self.client_ip}")
+        
+        # Check if IP should be blacklisted
+        if attempts >= self.honeypot.max_failed_attempts:
+            logger.warning(f"Blacklisting IP {self.client_ip} after {attempts} failed login attempts")
+            self.honeypot.add_to_blacklist(self.client_ip)
+            self.honeypot._log_activity((self.client_ip, 0), "blacklisted", f"IP blacklisted after {attempts} failed login attempts")
+            
         return paramiko.AUTH_FAILED
 
     def get_allowed_auths(self, username):
         return 'password'
         
     def check_channel_request(self, kind, chanid):
-        if kind == "session":
+        if (kind == "session"):
             return paramiko.OPEN_SUCCEEDED
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
         
@@ -219,7 +248,7 @@ class EnhancedIoTHoneypot:
             transport.add_server_key(self.host_key)
             transport.local_version = "SSH-2.0-OpenSSH_8.9p1"
             
-            server = SSHServer(self)
+            server = SSHServer(self, ip)
             try:
                 transport.start_server(server=server)
             except paramiko.SSHException as e:

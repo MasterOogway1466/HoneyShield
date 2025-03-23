@@ -564,3 +564,14 @@
 {"timestamp": "2025-03-22T20:11:16.171388", "ip": "127.0.0.1", "port": 45983, "type": "command", "details": "Command: devices", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T20:12:16.658327", "ip": "127.0.0.1", "port": 47949, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
 {"timestamp": "2025-03-22T20:12:42.798546", "ip": "127.0.0.1", "port": 48507, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:59:44.537346", "ip": "127.0.0.1", "port": 44915, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-22T23:59:56.115709", "ip": "127.0.0.1", "port": 44915, "type": "command", "details": "Command: help", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:00:09.376405", "ip": "127.0.0.1", "port": 44915, "type": "command", "details": "Command: scan", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:03:58.825120", "ip": "127.0.0.1", "port": 45343, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:13.922186", "ip": "127.0.0.1", "port": 46689, "type": "connection", "details": "New connection to smart_bulb", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:16.489499", "ip": "127.0.0.1", "port": 0, "type": "blacklisted", "details": "IP blacklisted after 4 failed login attempts", "device": "smart_bulb", "label": "threat"}
+{"timestamp": "2025-03-23T00:04:18.724491", "ip": "127.0.0.1", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:20.554668", "ip": "127.0.0.1", "port": 0, "type": "blocked_login", "details": "Blocked login attempt from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:22.040097", "ip": "127.0.0.1", "port": 47181, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:27.701744", "ip": "127.0.0.1", "port": 47611, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
+{"timestamp": "2025-03-23T00:04:33.509886", "ip": "127.0.0.1", "port": 47621, "type": "blacklisted_connection", "details": "Connection from blacklisted IP", "device": "smart_bulb", "label": "info"}
