@@ -128,7 +128,8 @@ class CICFlowMeterIntegration:
             }
             
             # Add to dataframe and save
-            self.flow_data = pd.concat([self.flow_data, pd.DataFrame([flow])], ignore_index=True)
+            new_row = pd.DataFrame([flow], columns=self.flow_data.columns)
+            self.flow_data = pd.concat([self.flow_data, new_row], ignore_index=True)
             self.flow_data.to_csv(flow_file, index=False)
             
             # Log occasional attacks
