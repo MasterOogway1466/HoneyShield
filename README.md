@@ -33,7 +33,7 @@ This project combines a sophisticated IoT honeypot with machine learning-based i
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/krishnakravi/IOT.git
+   git clone https://github.com/MasterOogway1466/HoneyShield.git
    cd iot-security-anomaly-detection
    ```
 
